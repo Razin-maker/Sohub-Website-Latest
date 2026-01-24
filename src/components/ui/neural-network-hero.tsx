@@ -139,23 +139,23 @@ const fragmentShader = `
 
     buf[0] = sigmoid(buf[0]);
     
-    // Remap to white/orange palette (flipped)
+    // Remap to light orange/white palette
     float luminance = buf[0].x * 0.3 + buf[0].y * 0.5 + buf[0].z * 0.2;
     
-    // Brand orange: #fc9206 = rgb(252, 146, 6) / 255 = (0.988, 0.573, 0.024)
-    vec3 brandOrange = vec3(0.988, 0.573, 0.024);
-    vec3 lightOrange = vec3(1.0, 0.75, 0.45);
-    vec3 warmWhite = vec3(1.0, 0.98, 0.95);
-    vec3 softCream = vec3(0.99, 0.96, 0.92);
+    // Lighter orange palette
+    vec3 palePeach = vec3(1.0, 0.92, 0.85);
+    vec3 softApricot = vec3(1.0, 0.85, 0.72);
+    vec3 warmWhite = vec3(1.0, 0.99, 0.97);
+    vec3 pureWhite = vec3(1.0, 1.0, 1.0);
     
-    // Flipped: white/cream for dark areas, orange for bright areas
+    // Orange base, white in flowing patterns
     vec3 color;
     if (luminance < 0.4) {
-      color = mix(warmWhite, softCream, luminance / 0.4);
+      color = mix(palePeach, softApricot, luminance / 0.4);
     } else if (luminance < 0.7) {
-      color = mix(softCream, lightOrange, (luminance - 0.4) / 0.3);
+      color = mix(softApricot, warmWhite, (luminance - 0.4) / 0.3);
     } else {
-      color = mix(lightOrange, brandOrange, (luminance - 0.7) / 0.3);
+      color = mix(warmWhite, pureWhite, (luminance - 0.7) / 0.3);
     }
     
     return vec4(color, 1.0);
