@@ -138,7 +138,27 @@ const fragmentShader = `
     + vec4(-1.5468478, -3.6171484, 0.24762098, 0.0);
 
     buf[0] = sigmoid(buf[0]);
-    return vec4(buf[0].x , buf[0].y , buf[0].z, 1.0);
+    
+    // Remap to orange/white palette
+    float luminance = buf[0].x * 0.3 + buf[0].y * 0.5 + buf[0].z * 0.2;
+    
+    // Brand orange: #fc9206 = rgb(252, 146, 6) / 255 = (0.988, 0.573, 0.024)
+    vec3 brandOrange = vec3(0.988, 0.573, 0.024);
+    vec3 lightOrange = vec3(1.0, 0.75, 0.45);
+    vec3 warmWhite = vec3(1.0, 0.98, 0.95);
+    vec3 softCream = vec3(0.99, 0.96, 0.92);
+    
+    // Create smooth gradient between colors based on luminance
+    vec3 color;
+    if (luminance < 0.4) {
+      color = mix(brandOrange, lightOrange, luminance / 0.4);
+    } else if (luminance < 0.7) {
+      color = mix(lightOrange, softCream, (luminance - 0.4) / 0.3);
+    } else {
+      color = mix(softCream, warmWhite, (luminance - 0.7) / 0.3);
+    }
+    
+    return vec4(color, 1.0);
   }
   
   void main() {
@@ -332,17 +352,17 @@ export default function NeuralNetworkHero({
       <div className="relative z-10 flex min-h-screen w-full flex-col items-center justify-center px-6 text-center">
         <div
           ref={badgeRef}
-          className="mb-6 flex items-center gap-2 rounded-full border border-white/20 bg-white/10 backdrop-blur-md px-4 py-1.5 text-sm font-medium text-white"
+          className="mb-6 flex items-center gap-2 rounded-full border border-foreground/15 bg-background/80 backdrop-blur-md px-4 py-1.5 text-sm font-medium"
         >
-          <span className="rounded-full bg-white px-2 py-0.5 text-xs font-semibold text-gray-900">
+          <span className="rounded-full bg-primary px-2 py-0.5 text-xs font-semibold text-primary-foreground">
             {badgeLabel}
           </span>
-          <span className="text-white/80">{badgeText}</span>
+          <span className="text-foreground-muted">{badgeText}</span>
         </div>
 
         <h1
           ref={headerRef}
-          className="max-w-4xl text-5xl font-bold leading-[1.1] tracking-[-0.02em] text-white sm:text-6xl md:text-7xl lg:text-8xl"
+          className="max-w-4xl text-5xl font-bold leading-[1.1] tracking-[-0.02em] text-foreground sm:text-6xl md:text-7xl lg:text-8xl"
         >
           {words.map((word, index) => (
             <span key={index} className="word-span inline-block mr-[0.25em] last:mr-0">
@@ -353,7 +373,7 @@ export default function NeuralNetworkHero({
 
         <p
           ref={paraRef}
-          className="mt-8 max-w-xl text-lg leading-relaxed text-white/70 sm:text-xl"
+          className="mt-8 max-w-xl text-lg leading-relaxed text-foreground-muted sm:text-xl"
         >
           {description}
         </p>
@@ -368,8 +388,8 @@ export default function NeuralNetworkHero({
               href={button.href}
               className={
                 button.primary
-                  ? "rounded-full bg-white px-8 py-3.5 text-base font-semibold text-gray-900 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5"
-                  : "rounded-full border-2 border-white/30 bg-white/10 backdrop-blur-sm px-8 py-3.5 text-base font-semibold text-white transition-all duration-300 hover:border-white/50 hover:bg-white/20"
+                  ? "rounded-full bg-primary px-8 py-3.5 text-base font-semibold text-primary-foreground shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5"
+                  : "rounded-full border-2 border-foreground/20 bg-background/60 backdrop-blur-sm px-8 py-3.5 text-base font-semibold text-foreground transition-all duration-300 hover:border-foreground/40 hover:bg-background/80"
               }
             >
               {button.text}
@@ -379,11 +399,11 @@ export default function NeuralNetworkHero({
 
         <div
           ref={microRef}
-          className="mt-12 flex items-center gap-6 text-sm text-white/50"
+          className="mt-12 flex items-center gap-6 text-sm text-foreground-muted"
         >
           {microDetails.map((detail, index) => (
             <span key={index} className="flex items-center gap-2">
-              <span className="h-1 w-1 rounded-full bg-white/50" />
+              <span className="h-1 w-1 rounded-full bg-primary" />
               {detail}
             </span>
           ))}
