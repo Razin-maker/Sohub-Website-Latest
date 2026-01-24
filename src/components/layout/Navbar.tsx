@@ -27,43 +27,47 @@ export const Navbar = () => {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.5, ease: 'easeOut' }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled ? 'py-3' : 'py-4 md:py-5'
         }`}
         style={{ backgroundColor: '#fc9206' }}
       >
         <div className="container-main flex items-center justify-between">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2">
-            <span className="text-xl md:text-2xl font-bold text-white tracking-tight">
+          <a href="#" className="flex items-center gap-3 group">
+            <span className="text-xl md:text-2xl font-bold text-white tracking-[-0.02em]">
               SOHUB
             </span>
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                className="text-white/90 hover:text-white font-medium text-sm transition-colors duration-200"
+                className="px-4 py-2 text-white/85 hover:text-white font-medium text-[15px] rounded-full transition-all duration-300 hover:bg-white/10"
               >
                 {link.label}
               </a>
             ))}
+          </div>
+
+          {/* CTA Button */}
+          <div className="hidden lg:block">
             <a
               href="#ecosystem"
-              className="ml-4 px-5 py-2.5 bg-white text-foreground font-medium text-sm rounded-lg transition-all duration-200 hover:bg-white/90 hover:-translate-y-0.5"
+              className="px-6 py-2.5 bg-white text-[#1a1a1a] font-semibold text-[15px] rounded-full transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
             >
-              Explore the ecosystem
+              Explore ecosystem
             </a>
           </div>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 text-white"
+            className="lg:hidden p-2 text-white rounded-full hover:bg-white/10 transition-colors"
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -71,10 +75,12 @@ export const Navbar = () => {
         </div>
 
         {/* Shadow on scroll */}
-        <div
-          className={`absolute inset-0 -z-10 transition-shadow duration-300 ${
-            isScrolled ? 'shadow-lg' : ''
-          }`}
+        <motion.div
+          initial={false}
+          animate={{ 
+            opacity: isScrolled ? 1 : 0,
+          }}
+          className="absolute inset-0 -z-10 shadow-lg"
           style={{ backgroundColor: '#fc9206' }}
         />
       </motion.nav>
@@ -83,22 +89,22 @@ export const Navbar = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
             className="fixed inset-0 z-40 lg:hidden pt-20"
             style={{ backgroundColor: '#fc9206' }}
           >
-            <div className="container-main py-8 flex flex-col gap-6">
+            <div className="container-main py-8 flex flex-col gap-2">
               {navLinks.map((link, index) => (
                 <motion.a
                   key={link.label}
                   href={link.href}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.05 }}
-                  className="text-white text-xl font-medium"
+                  transition={{ delay: index * 0.05, duration: 0.3 }}
+                  className="text-white text-2xl font-semibold py-3 hover:pl-4 transition-all"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.label}
@@ -108,11 +114,11 @@ export const Navbar = () => {
                 href="#ecosystem"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.3 }}
-                className="mt-4 px-6 py-3 bg-white text-foreground font-medium rounded-lg text-center"
+                transition={{ delay: 0.3, duration: 0.3 }}
+                className="mt-6 px-8 py-4 bg-white text-[#1a1a1a] font-semibold rounded-full text-center text-lg"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Explore the ecosystem
+                Explore ecosystem
               </motion.a>
             </div>
           </motion.div>

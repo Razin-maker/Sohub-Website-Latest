@@ -24,19 +24,17 @@ export const SohubStandard = () => {
     <section className="section-spacing bg-background-subtle">
       <div className="container-main">
         <AnimatedSection>
-          <div className="text-center mb-16">
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
-              Our principles
-            </span>
-            <h2 className="text-section-title">The SOHUB Standard</h2>
+          <div className="text-center mb-16 lg:mb-20">
+            <p className="text-overline mb-4">Our principles</p>
+            <h2 className="text-headline">The SOHUB Standard</h2>
           </div>
         </AnimatedSection>
 
-        <div className="grid md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-4xl mx-auto">
           {standards.map((standard, index) => (
             <AnimatedSection key={standard.title} delay={index * 0.1}>
-              <div className="card-interactive h-full">
-                <h3 className="text-xl font-semibold text-foreground mb-3">
+              <div className="card-bento bg-background h-full">
+                <h3 className="text-subtitle text-foreground mb-4">
                   {standard.title}
                 </h3>
                 <p className="text-body">

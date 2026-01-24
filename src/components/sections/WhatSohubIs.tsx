@@ -4,37 +4,41 @@ export const WhatSohubIs = () => {
   return (
     <section id="about" className="section-spacing">
       <div className="container-main">
-        <div className="grid md:grid-cols-2 gap-12 md:gap-20">
-          <AnimatedSection>
-            <div>
-              <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
-                What we are
-              </span>
-              <h2 className="text-section-title mb-6">
+        <AnimatedSection>
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+            {/* What we are */}
+            <div className="card-bento bg-background-subtle">
+              <p className="text-overline mb-6">What we are</p>
+              <h2 className="text-title mb-6 text-foreground">
                 An ecosystem of focused systems.
               </h2>
-              <div className="text-body space-y-4">
-                <p>Each solves one real problem.</p>
-                <p>Together, they raise the standard.</p>
+              <div className="space-y-4">
+                <p className="text-body-lg text-foreground/90">
+                  Each solves one real problem.
+                </p>
+                <p className="text-body-lg text-foreground/90">
+                  Together, they raise the standard.
+                </p>
               </div>
             </div>
-          </AnimatedSection>
 
-          <AnimatedSection delay={0.15}>
-            <div>
-              <span className="text-sm font-semibold text-foreground-subtle uppercase tracking-wider mb-4 block">
-                What we are not
-              </span>
-              <h2 className="text-section-title mb-6 text-foreground-muted">
+            {/* What we are not */}
+            <div className="card-bento bg-background border border-border/50">
+              <p className="text-overline mb-6 opacity-50">What we are not</p>
+              <h2 className="text-title mb-6 text-foreground-muted">
                 Not a typical service company.
               </h2>
-              <div className="text-body space-y-4 text-foreground-subtle">
-                <p>Not random products.</p>
-                <p>Not noise.</p>
+              <div className="space-y-4">
+                <p className="text-body text-foreground-subtle">
+                  Not random products.
+                </p>
+                <p className="text-body text-foreground-subtle">
+                  Not noise.
+                </p>
               </div>
             </div>
-          </AnimatedSection>
-        </div>
+          </div>
+        </AnimatedSection>
       </div>
     </section>
   );

@@ -41,13 +41,13 @@ const footerSections = [
 
 export const Footer = () => {
   return (
-    <footer id="contact" className="bg-foreground text-white py-16 md:py-20">
+    <footer id="contact" className="bg-foreground text-white py-20 md:py-24">
       <div className="container-main">
         <AnimatedSection>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-16">
-            <div className="col-span-2 md:col-span-4 lg:col-span-1 mb-8 lg:mb-0">
-              <span className="text-2xl font-bold tracking-tight">SOHUB</span>
-              <p className="text-white/60 mt-4 text-sm max-w-xs">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-10 mb-16">
+            <div className="col-span-2 md:col-span-4 lg:col-span-1 mb-4 lg:mb-0">
+              <span className="text-2xl font-bold tracking-[-0.02em]">SOHUB</span>
+              <p className="text-white/50 mt-5 text-sm leading-relaxed max-w-xs">
                 Solution Hub Technologies
                 <br />
                 Building the future of Bangladesh.
@@ -55,13 +55,13 @@ export const Footer = () => {
             </div>
             {footerSections.map((section) => (
               <div key={section.title}>
-                <h4 className="font-semibold mb-4 text-white/90">{section.title}</h4>
+                <h4 className="font-semibold mb-5 text-white/80 text-sm uppercase tracking-wide">{section.title}</h4>
                 <ul className="space-y-3">
                   {section.links.map((link) => (
                     <li key={link.label}>
                       <a
                         href={link.href}
-                        className="text-sm text-white/60 hover:text-white transition-colors"
+                        className="text-sm text-white/50 hover:text-white transition-colors duration-300"
                       >
                         {link.label}
                       </a>
@@ -72,13 +72,13 @@ export const Footer = () => {
             ))}
           </div>
 
-          <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-white/50">
+          <div className="pt-10 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-sm text-white/40">
               © {new Date().getFullYear()} SOHUB — Solution Hub Technologies. All rights reserved.
             </p>
-            <div className="flex gap-6 text-sm text-white/50">
-              <a href="#" className="hover:text-white transition-colors">Privacy</a>
-              <a href="#" className="hover:text-white transition-colors">Terms</a>
+            <div className="flex gap-8 text-sm text-white/40">
+              <a href="#" className="hover:text-white transition-colors duration-300">Privacy</a>
+              <a href="#" className="hover:text-white transition-colors duration-300">Terms</a>
             </div>
           </div>
         </AnimatedSection>
