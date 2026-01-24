@@ -29,14 +29,15 @@ export const Navbar = () => {
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled ? 'py-3' : 'py-4 md:py-5'
+          isScrolled ? 'py-3 bg-[#fc9206]' : 'py-4 md:py-5 bg-transparent'
         }`}
-        style={{ backgroundColor: '#fc9206' }}
       >
         <div className="container-main flex items-center justify-between">
           {/* Logo */}
           <a href="#" className="flex items-center gap-3 group">
-            <span className="text-xl md:text-2xl font-bold text-white tracking-[-0.02em]">
+            <span className={`text-xl md:text-2xl font-bold tracking-[-0.02em] transition-colors duration-300 ${
+              isScrolled ? 'text-white' : 'text-[#1a1a1a]'
+            }`}>
               SOHUB
             </span>
           </a>
@@ -47,7 +48,11 @@ export const Navbar = () => {
               <a
                 key={link.label}
                 href={link.href}
-                className="px-4 py-2 text-white/85 hover:text-white font-medium text-[15px] rounded-full transition-all duration-300 hover:bg-white/10"
+                className={`px-4 py-2 font-medium text-[15px] rounded-full transition-all duration-300 ${
+                  isScrolled 
+                    ? 'text-white/85 hover:text-white hover:bg-white/10' 
+                    : 'text-[#1a1a1a]/70 hover:text-[#1a1a1a] hover:bg-[#1a1a1a]/5'
+                }`}
               >
                 {link.label}
               </a>
@@ -58,7 +63,11 @@ export const Navbar = () => {
           <div className="hidden lg:block">
             <a
               href="#ecosystem"
-              className="px-6 py-2.5 bg-white text-[#1a1a1a] font-semibold text-[15px] rounded-full transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
+              className={`px-6 py-2.5 font-semibold text-[15px] rounded-full transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 ${
+                isScrolled 
+                  ? 'bg-white text-[#1a1a1a]' 
+                  : 'bg-[#fc9206] text-white shadow-lg shadow-[#fc9206]/25'
+              }`}
             >
               Explore ecosystem
             </a>
@@ -67,7 +76,11 @@ export const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 text-white rounded-full hover:bg-white/10 transition-colors"
+            className={`lg:hidden p-2 rounded-full transition-colors ${
+              isScrolled 
+                ? 'text-white hover:bg-white/10' 
+                : 'text-[#1a1a1a] hover:bg-[#1a1a1a]/5'
+            }`}
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -80,8 +93,7 @@ export const Navbar = () => {
           animate={{ 
             opacity: isScrolled ? 1 : 0,
           }}
-          className="absolute inset-0 -z-10 shadow-lg"
-          style={{ backgroundColor: '#fc9206' }}
+          className="absolute inset-0 -z-10 shadow-lg bg-[#fc9206]"
         />
       </motion.nav>
 
