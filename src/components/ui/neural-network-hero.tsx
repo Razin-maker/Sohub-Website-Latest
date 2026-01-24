@@ -158,6 +158,11 @@ const fragmentShader = `
       color = mix(warmWhite, pureWhite, (luminance - 0.7) / 0.3);
     }
     
+    // Subtle pulsing glow effect
+    float pulse = 0.5 + 0.5 * sin(iTime * 0.8);
+    float glowIntensity = 0.03 * pulse;
+    color = color + vec3(glowIntensity * 0.8, glowIntensity * 0.5, glowIntensity * 0.2);
+    
     return vec4(color, 1.0);
   }
   
