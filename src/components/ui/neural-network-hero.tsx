@@ -149,13 +149,13 @@ const fragmentShader = `
     
     // Transform to orange/white palette
     // Original output is in buf[0].xyz (0-1 range)
-    // Brand orange: #fc9206 = rgb(252, 146, 6) = normalized (0.988, 0.573, 0.024)
+    // Lighter brand orange (40% lighter): mix toward white
     float luminance = dot(buf[0].xyz, vec3(0.299, 0.587, 0.114));
     
-    // Create warm orange-white gradient based on luminance
-    vec3 brandOrange = vec3(0.988, 0.573, 0.024);
-    vec3 warmWhite = vec3(1.0, 0.98, 0.95);
-    vec3 softCream = vec3(0.99, 0.95, 0.88);
+    // Create warm orange-white gradient based on luminance - 40% lighter
+    vec3 brandOrange = vec3(0.992, 0.75, 0.4); // Lighter orange (40% toward white)
+    vec3 warmWhite = vec3(1.0, 0.995, 0.98);
+    vec3 softCream = vec3(0.995, 0.97, 0.92);
     
     // Mix between orange tones and whites based on the neural pattern
     vec3 finalColor;
@@ -173,7 +173,9 @@ const fragmentShader = `
   
   void main() {
     vec2 uv = vUv * 2.0 - 1.0; uv.y *= -1.0;
-    gl_FragColor = cppn_fn(uv, 0.1 * sin(0.3 * iTime), 0.1 * sin(0.69 * iTime), 0.1 * sin(0.44 * iTime));
+    // Speed up animation by 4x
+    float t = iTime * 4.0;
+    gl_FragColor = cppn_fn(uv, 0.1 * sin(0.3 * t), 0.1 * sin(0.69 * t), 0.1 * sin(0.44 * t));
   }
 `;
 
@@ -191,12 +193,13 @@ function ShaderPlane() {
   useFrame((state) => {
     if (!materialRef.current) return;
     materialRef.current.iTime = state.clock.elapsedTime;
-    const { width, height } = state.size;
-    materialRef.current.iResolution.set(width, height);
+    // Use viewport size for proper full-screen coverage
+    const { viewport } = state;
+    materialRef.current.iResolution.set(viewport.width, viewport.height);
   });
 
   return (
-    <mesh>
+    <mesh scale={[4, 4, 1]}>
       <planeGeometry args={[2, 2]} />
       <cPPNShaderMaterial ref={materialRef} />
     </mesh>
@@ -233,10 +236,15 @@ function ShaderBackground() {
   return (
     <div
       ref={canvasRef}
-      className="absolute inset-0 w-full h-full"
-      style={{ willChange: 'filter, transform, opacity' }}
+      className="absolute inset-0 w-full h-full overflow-hidden"
+      style={{ willChange: 'filter, transform, opacity', width: '100vw', height: '100vh' }}
     >
-      <Canvas camera={camera} gl={{ antialias: true, alpha: true }}>
+      <Canvas 
+        camera={camera} 
+        gl={{ antialias: true, alpha: true }}
+        style={{ width: '100%', height: '100%' }}
+        dpr={[1, 2]}
+      >
         <ShaderPlane />
       </Canvas>
     </div>
