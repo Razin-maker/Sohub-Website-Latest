@@ -139,29 +139,29 @@ const fragmentShader = `
 
     buf[0] = sigmoid(buf[0]);
     
-    // Remap to light orange/white palette
+    // Remap to orange/white palette with more contrast
     float luminance = buf[0].x * 0.3 + buf[0].y * 0.5 + buf[0].z * 0.2;
     
-    // Lighter orange palette
-    vec3 palePeach = vec3(1.0, 0.92, 0.85);
-    vec3 softApricot = vec3(1.0, 0.85, 0.72);
-    vec3 warmWhite = vec3(1.0, 0.99, 0.97);
-    vec3 pureWhite = vec3(1.0, 1.0, 1.0);
+    // Darker, more visible orange palette
+    vec3 deepOrange = vec3(0.98, 0.6, 0.15);
+    vec3 warmOrange = vec3(0.99, 0.72, 0.35);
+    vec3 softPeach = vec3(1.0, 0.88, 0.7);
+    vec3 warmWhite = vec3(1.0, 0.96, 0.92);
     
-    // Orange base, white in flowing patterns
+    // Orange base with white flowing patterns - more contrast
     vec3 color;
-    if (luminance < 0.4) {
-      color = mix(palePeach, softApricot, luminance / 0.4);
-    } else if (luminance < 0.7) {
-      color = mix(softApricot, warmWhite, (luminance - 0.4) / 0.3);
+    if (luminance < 0.3) {
+      color = mix(deepOrange, warmOrange, luminance / 0.3);
+    } else if (luminance < 0.6) {
+      color = mix(warmOrange, softPeach, (luminance - 0.3) / 0.3);
     } else {
-      color = mix(warmWhite, pureWhite, (luminance - 0.7) / 0.3);
+      color = mix(softPeach, warmWhite, (luminance - 0.6) / 0.4);
     }
     
-    // Subtle pulsing glow effect
+    // Stronger pulsing glow effect
     float pulse = 0.5 + 0.5 * sin(iTime * 0.8);
-    float glowIntensity = 0.03 * pulse;
-    color = color + vec3(glowIntensity * 0.8, glowIntensity * 0.5, glowIntensity * 0.2);
+    float glowIntensity = 0.05 * pulse;
+    color = color + vec3(glowIntensity * 0.6, glowIntensity * 0.3, glowIntensity * 0.1);
     
     return vec4(color, 1.0);
   }
