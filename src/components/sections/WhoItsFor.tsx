@@ -31,30 +31,29 @@ const audiences = [
 
 export const WhoItsFor = () => {
   return (
-    <section className="section-spacing">
+    <section className="section-spacing bg-background-subtle">
       <div className="container-main">
         <AnimatedSection>
           <div className="text-center mb-16">
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
-              Who we serve
-            </span>
-            <h2 className="text-section-title">
-              Built for those who build
-            </h2>
+            <p className="text-overline mb-4">Who we serve</p>
+            <h2 className="text-headline">Built for those who build</h2>
           </div>
         </AnimatedSection>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
           {audiences.map((audience, index) => (
             <AnimatedSection key={audience.title} delay={index * 0.08}>
-              <div className="card-interactive text-center h-full">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                  <audience.icon className="w-6 h-6 text-primary" />
+              <div className="card-bento bg-background text-center h-full group">
+                <div 
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-transform duration-300 group-hover:scale-110"
+                  style={{ background: 'hsl(32 96% 51% / 0.1)' }}
+                >
+                  <audience.icon className="w-6 h-6" style={{ color: 'hsl(32, 96%, 51%)' }} />
                 </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">
+                <h3 className="text-lg font-semibold text-foreground mb-3">
                   {audience.title}
                 </h3>
-                <p className="text-sm text-foreground-muted">
+                <p className="text-body-sm">
                   {audience.description}
                 </p>
               </div>

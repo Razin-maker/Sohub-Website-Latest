@@ -3,55 +3,64 @@ import { ArrowRight } from 'lucide-react';
 
 export const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
-      {/* Subtle grid pattern */}
-      <div className="absolute inset-0 grid-pattern opacity-30" />
-      
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
+    <section className="relative min-h-[100vh] flex items-center pt-24 pb-20 overflow-hidden">
+      {/* Subtle background elements */}
+      <div className="absolute inset-0 grid-dots opacity-40" />
+      <div 
+        className="absolute top-1/4 -right-[20%] w-[60%] h-[60%] rounded-full blur-3xl opacity-[0.08]"
+        style={{ background: 'hsl(32 96% 51%)' }}
+      />
 
-      <div className="container-main relative z-10 py-20 md:py-32">
-        <div className="max-w-4xl">
+      <div className="container-main relative z-10">
+        <div className="max-w-[900px]">
+          {/* Overline */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="text-overline mb-6"
+          >
+            Solution Hub Technologies
+          </motion.p>
+
+          {/* Main Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-            className="text-hero text-foreground mb-8"
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            className="text-display text-foreground mb-8"
           >
-            BEGIN DIFFERENT.
+            Begin different.
             <br />
-            WIN DIFFERENT.
+            <span className="text-foreground/80">Win different.</span>
           </motion.h1>
 
+          {/* Subtext - Google-style readable paragraphs */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
-            className="max-w-2xl mb-12"
+            transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="max-w-[580px] mb-12 space-y-5"
           >
-            <p className="text-body-large mb-4">
-              Bangladesh deserves better.
+            <p className="text-body-xl">
+              Bangladesh deserves better. Not more talk — working systems.
             </p>
-            <p className="text-body-large mb-4">
-              Not more talk — working systems.
-            </p>
-            <p className="text-body-large">
-              Built with discipline. Measured by results. Open to the people we serve.
+            <p className="text-body-lg">
+              Built with discipline. Measured by results. 
+              Open to the people we serve.
             </p>
           </motion.div>
 
+          {/* CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="flex flex-wrap gap-4"
           >
-            <a
-              href="#ecosystem"
-              className="btn-primary group"
-            >
+            <a href="#ecosystem" className="btn-primary group">
               Explore the ecosystem
-              <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
             </a>
             <a href="#why" className="btn-outline">
               Why we exist
@@ -62,15 +71,6 @@ export const Hero = () => {
           </motion.div>
         </div>
       </div>
-
-      {/* Ambient decoration */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 0.08, scale: 1 }}
-        transition={{ duration: 1.5, delay: 0.5 }}
-        className="absolute -right-40 top-1/4 w-[600px] h-[600px] rounded-full"
-        style={{ background: 'radial-gradient(circle, hsl(32 96% 51%) 0%, transparent 70%)' }}
-      />
     </section>
   );
 };

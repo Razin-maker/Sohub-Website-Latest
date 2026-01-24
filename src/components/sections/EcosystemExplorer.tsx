@@ -71,21 +71,19 @@ export const EcosystemExplorer = () => {
     <section id="ecosystem" className="section-spacing">
       <div className="container-main">
         <AnimatedSection>
-          <div className="text-center mb-12">
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
-              Our Ecosystem
-            </span>
-            <h2 className="text-section-title mb-4">
+          <div className="text-center mb-12 lg:mb-16">
+            <p className="text-overline mb-4">Our Ecosystem</p>
+            <h2 className="text-headline mb-6">
               One ecosystem. Many focused systems.
             </h2>
-            <p className="text-body-large max-w-2xl mx-auto">
+            <p className="text-body-xl max-w-xl mx-auto">
               Explore what matters to you. Go deep — at your pace.
             </p>
           </div>
         </AnimatedSection>
 
         <AnimatedSection delay={0.1}>
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
+          <div className="flex flex-wrap justify-center gap-3 mb-12 lg:mb-16">
             {filters.map((filter) => (
               <button
                 key={filter.id}
@@ -100,7 +98,7 @@ export const EcosystemExplorer = () => {
           </div>
         </AnimatedSection>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
           <AnimatePresence mode="popLayout">
             {filteredSystems.map((system) => (
               <motion.div
@@ -109,18 +107,18 @@ export const EcosystemExplorer = () => {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
               >
-                <div className="card-interactive group cursor-pointer h-full flex flex-col">
-                  <h3 className="text-xl font-semibold text-foreground mb-2">
+                <div className="card-bento group cursor-pointer h-full flex flex-col bg-background-subtle hover:bg-background">
+                  <h3 className="text-xl font-semibold text-foreground mb-3 tracking-[-0.01em]">
                     {system.name}
                   </h3>
-                  <p className="text-body flex-grow mb-4">
+                  <p className="text-body-sm flex-grow mb-5">
                     {system.purpose}
                   </p>
-                  <span className="inline-flex items-center text-sm font-medium text-primary group-hover:gap-2 transition-all">
+                  <span className="btn-link text-sm">
                     Explore
-                    <ArrowRight className="ml-1 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="w-4 h-4" />
                   </span>
                 </div>
               </motion.div>

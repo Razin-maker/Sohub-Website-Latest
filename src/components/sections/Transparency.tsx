@@ -11,32 +11,28 @@ const resources = [
 
 export const Transparency = () => {
   return (
-    <section id="transparency" className="section-spacing bg-background-subtle">
+    <section id="transparency" className="section-spacing">
       <div className="container-main">
         <AnimatedSection>
-          <div className="text-center mb-12">
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
-              Transparency
-            </span>
-            <h2 className="text-section-title mb-4">
-              Open by design.
-            </h2>
-            <p className="text-body-large max-w-xl mx-auto">
+          <div className="text-center mb-12 lg:mb-16">
+            <p className="text-overline mb-4">Transparency</p>
+            <h2 className="text-headline mb-6">Open by design.</h2>
+            <p className="text-body-lg max-w-lg mx-auto">
               We believe trust is built through visibility. Explore how we work.
             </p>
           </div>
         </AnimatedSection>
 
         <AnimatedSection delay={0.15}>
-          <div className="flex flex-wrap justify-center gap-4 max-w-3xl mx-auto">
+          <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
             {resources.map((resource) => (
               <a
                 key={resource.label}
                 href={resource.href}
-                className="group flex items-center gap-3 px-6 py-4 bg-background border border-border rounded-xl transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
+                className="group flex items-center gap-4 px-7 py-5 bg-background-subtle rounded-2xl transition-all duration-400 hover:bg-background hover:shadow-lg hover:-translate-y-1"
               >
                 <resource.icon className="w-5 h-5 text-primary" />
-                <span className="font-medium text-foreground">
+                <span className="font-semibold text-foreground">
                   {resource.label}
                 </span>
                 <ArrowRight className="w-4 h-4 text-foreground-muted transition-transform group-hover:translate-x-1" />
