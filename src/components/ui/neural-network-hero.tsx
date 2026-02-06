@@ -139,29 +139,36 @@ const fragmentShader = `
 
     buf[0] = sigmoid(buf[0]);
     
-    // Remap to orange/white palette with more contrast
+    // Base44-inspired sky blue to warm peach gradient
     float luminance = buf[0].x * 0.3 + buf[0].y * 0.5 + buf[0].z * 0.2;
     
-    // Darker, more visible orange palette
-    vec3 deepOrange = vec3(0.98, 0.6, 0.15);
-    vec3 warmOrange = vec3(0.99, 0.72, 0.35);
-    vec3 softPeach = vec3(1.0, 0.88, 0.7);
-    vec3 warmWhite = vec3(1.0, 0.96, 0.92);
+    // Base44 palette: sky blue → soft peach/cream
+    vec3 skyBlue = vec3(0.73, 0.88, 0.96);      // #bae0f5 light sky
+    vec3 paleBlue = vec3(0.85, 0.93, 0.98);     // lighter transition
+    vec3 warmCream = vec3(0.99, 0.96, 0.92);    // warm cream
+    vec3 softPeach = vec3(1.0, 0.93, 0.85);     // #ffedda soft peach
     
-    // Orange base with white flowing patterns - more contrast
-    vec3 color;
-    if (luminance < 0.3) {
-      color = mix(deepOrange, warmOrange, luminance / 0.3);
-    } else if (luminance < 0.6) {
-      color = mix(warmOrange, softPeach, (luminance - 0.3) / 0.3);
+    // Vertical gradient simulation via luminance - sky on top, peach on bottom
+    vec2 uv = vUv;
+    float gradientMix = uv.y; // 0 at bottom, 1 at top
+    
+    // Sky blue at top, warm peach at bottom
+    vec3 baseGradient = mix(softPeach, skyBlue, gradientMix);
+    
+    // Subtle flowing patterns
+    vec3 flowColor;
+    if (luminance < 0.4) {
+      flowColor = mix(baseGradient * 0.98, baseGradient, luminance / 0.4);
+    } else if (luminance < 0.7) {
+      flowColor = mix(baseGradient, baseGradient * 1.02, (luminance - 0.4) / 0.3);
     } else {
-      color = mix(softPeach, warmWhite, (luminance - 0.6) / 0.4);
+      flowColor = mix(baseGradient * 1.02, vec3(1.0), (luminance - 0.7) / 0.3 * 0.15);
     }
     
-    // Stronger pulsing glow effect
-    float pulse = 0.5 + 0.5 * sin(iTime * 0.8);
-    float glowIntensity = 0.05 * pulse;
-    color = color + vec3(glowIntensity * 0.6, glowIntensity * 0.3, glowIntensity * 0.1);
+    // Very subtle pulsing - almost imperceptible like Base44
+    float pulse = 0.5 + 0.5 * sin(iTime * 0.4);
+    float glowIntensity = 0.008 * pulse;
+    vec3 color = flowColor + vec3(glowIntensity);
     
     return vec4(color, 1.0);
   }
@@ -355,19 +362,21 @@ export default function NeuralNetworkHero({
       <ShaderBackground />
 
       <div className="relative z-10 flex min-h-screen w-full flex-col items-center justify-center px-6 text-center">
+        {/* Base44-style minimal badge */}
         <div
           ref={badgeRef}
-          className="mb-6 flex items-center gap-2 rounded-full border border-foreground/15 bg-background/80 backdrop-blur-md px-4 py-1.5 text-sm font-medium"
+          className="mb-8 flex items-center gap-2 rounded-full border border-foreground/10 bg-white/70 backdrop-blur-sm px-4 py-2 text-sm font-medium shadow-sm"
         >
-          <span className="rounded-full bg-primary px-2 py-0.5 text-xs font-semibold text-primary-foreground">
+          <span className="rounded-full bg-primary px-2.5 py-0.5 text-xs font-semibold text-primary-foreground">
             {badgeLabel}
           </span>
-          <span className="text-foreground-muted">{badgeText}</span>
+          <span className="text-foreground/70">{badgeText}</span>
         </div>
 
+        {/* Large, bold headline - Base44 style */}
         <h1
           ref={headerRef}
-          className="max-w-4xl text-5xl font-bold leading-[1.1] tracking-[-0.02em] text-foreground sm:text-6xl md:text-7xl lg:text-8xl"
+          className="max-w-4xl text-4xl font-semibold leading-[1.15] tracking-[-0.03em] text-foreground sm:text-5xl md:text-6xl lg:text-7xl"
         >
           {words.map((word, index) => (
             <span key={index} className="word-span inline-block mr-[0.25em] last:mr-0">
@@ -376,16 +385,18 @@ export default function NeuralNetworkHero({
           ))}
         </h1>
 
+        {/* Subtitle - cleaner, more subdued */}
         <p
           ref={paraRef}
-          className="mt-8 max-w-xl text-lg leading-relaxed text-foreground-muted sm:text-xl"
+          className="mt-6 max-w-lg text-base leading-relaxed text-foreground/60 sm:text-lg md:text-xl"
         >
           {description}
         </p>
 
+        {/* Base44-style input/CTA area */}
         <div
           ref={ctaRef}
-          className="mt-10 flex flex-wrap items-center justify-center gap-4"
+          className="mt-10 flex flex-wrap items-center justify-center gap-3"
         >
           {ctaButtons.map((button, index) => (
             <a
@@ -393,8 +404,8 @@ export default function NeuralNetworkHero({
               href={button.href}
               className={
                 button.primary
-                  ? "rounded-full bg-primary px-8 py-3.5 text-base font-semibold text-primary-foreground shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5"
-                  : "rounded-full border-2 border-foreground/20 bg-background/60 backdrop-blur-sm px-8 py-3.5 text-base font-semibold text-foreground transition-all duration-300 hover:border-foreground/40 hover:bg-background/80"
+                  ? "rounded-full bg-primary px-7 py-3 text-sm font-semibold text-primary-foreground shadow-md transition-all duration-200 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]"
+                  : "rounded-full border border-foreground/15 bg-white/80 backdrop-blur-sm px-7 py-3 text-sm font-medium text-foreground/80 transition-all duration-200 hover:bg-white hover:border-foreground/25"
               }
             >
               {button.text}
@@ -402,16 +413,22 @@ export default function NeuralNetworkHero({
           ))}
         </div>
 
+        {/* Micro details - subtle chips like Base44 */}
         <div
           ref={microRef}
-          className="mt-12 flex items-center gap-6 text-sm text-foreground-muted"
+          className="mt-16 text-xs uppercase tracking-[0.15em] text-foreground/40"
         >
-          {microDetails.map((detail, index) => (
-            <span key={index} className="flex items-center gap-2">
-              <span className="h-1 w-1 rounded-full bg-primary" />
-              {detail}
-            </span>
-          ))}
+          <span className="mb-4 block">Not sure where to start? We focus on:</span>
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+            {microDetails.map((detail, index) => (
+              <span 
+                key={index} 
+                className="rounded-full border border-foreground/10 bg-white/60 px-4 py-2 text-xs font-medium text-foreground/70 transition-colors hover:bg-white hover:border-foreground/20"
+              >
+                {detail}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </section>
