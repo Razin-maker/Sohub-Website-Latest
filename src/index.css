@@ -8,14 +8,14 @@
 
 @layer base {
   :root {
-    /* Brand Colors - Base44 inspired coral/orange */
-    --sohub-primary: 16 90% 55%; /* Coral orange like Base44 */
-    --sohub-primary-dark: 16 90% 45%;
+    /* Brand Colors - SOHUB Orange #fc9206 */
+    --sohub-primary: 32 97% 51%; /* #fc9206 */
+    --sohub-primary-dark: 32 97% 41%;
 
-    /* Hero gradient - Base44 sky blue to peach */
-    --hero-accent: 16 90% 55%;
+    /* Hero gradient */
+    --hero-accent: 32 97% 51%; /* #fc9206 */
     --hero-accent-foreground: 0 0% 100%;
-    --hero-paper: 30 50% 97%;
+    --hero-paper: 30 50% 98%;
     
     /* Core Palette - Clean like Base44 */
     --background: 0 0% 100%;
@@ -31,7 +31,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 12%;
 
-    --primary: 16 90% 55%;
+    --primary: 32 97% 51%; /* #fc9206 */
     --primary-foreground: 0 0% 100%;
 
     --secondary: 30 15% 96%;
@@ -40,7 +40,7 @@
     --muted: 30 15% 96%;
     --muted-foreground: 0 0% 50%;
 
-    --accent: 16 90% 55%;
+    --accent: 32 97% 51%; /* #fc9206 */
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
@@ -48,7 +48,7 @@
 
     --border: 30 10% 90%;
     --input: 30 10% 90%;
-    --ring: 16 90% 55%;
+    --ring: 32 97% 51%; /* #fc9206 */
 
     --radius: 0.75rem;
 
@@ -69,7 +69,7 @@
     --sidebar-accent: 30 15% 96%;
     --sidebar-accent-foreground: 0 0% 12%;
     --sidebar-border: 30 10% 92%;
-    --sidebar-ring: 16 90% 55%;
+    --sidebar-ring: 32 97% 51%; /* #fc9206 */
   }
 
   .dark {

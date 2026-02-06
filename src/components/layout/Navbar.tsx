@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import logoOrange from '@/assets/logo-orange.svg';
 
 const navLinks = [
   { label: 'Ecosystem', href: '#ecosystem' },
@@ -37,9 +38,7 @@ export const Navbar = () => {
         <div className="container-main flex items-center justify-between">
           {/* Logo */}
           <a href="#" className="flex items-center gap-3 group">
-            <span className="text-xl md:text-2xl font-bold tracking-[-0.02em] text-foreground">
-              SOHUB
-            </span>
+            <img src={logoOrange} alt="SOHUB" className="h-6 md:h-7 w-auto" />
           </a>
 
           {/* Desktop Navigation */}
