@@ -90,8 +90,8 @@ export const EcosystemExplorer = () => {
                 onClick={() => setActiveFilter(filter.id)}
                 className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
                   activeFilter === filter.id 
-                    ? 'bg-foreground text-background' 
-                    : 'bg-transparent border border-foreground/10 text-foreground/60 hover:border-foreground/20 hover:text-foreground'
+                    ? 'bg-primary text-primary-foreground' 
+                    : 'bg-transparent border border-foreground/10 text-foreground/60 hover:border-primary/30 hover:text-primary'
                 }`}
               >
                 {filter.label}
@@ -111,14 +111,14 @@ export const EcosystemExplorer = () => {
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
               >
-                <div className="group cursor-pointer h-full flex flex-col p-8 rounded-2xl bg-white border border-foreground/5 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                <div className="group cursor-pointer h-full flex flex-col p-8 rounded-2xl bg-white border border-foreground/5 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:border-primary/20">
                   <h3 className="text-xl font-semibold text-foreground mb-3 tracking-[-0.01em]">
                     {system.name}
                   </h3>
                   <p className="text-foreground/50 flex-grow mb-5 text-sm leading-relaxed">
                     {system.purpose}
                   </p>
-                  <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-foreground/70 group-hover:text-foreground transition-colors">
+                  <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary group-hover:text-primary transition-colors">
                     Explore
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </span>

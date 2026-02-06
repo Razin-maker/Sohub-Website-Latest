@@ -42,7 +42,7 @@ const footerSections = [
 
 export const Footer = () => {
   return (
-    <footer id="contact" className="bg-foreground text-white py-20 md:py-24">
+    <footer id="contact" className="bg-primary text-white py-20 md:py-24">
       <div className="container-main">
         <AnimatedSection>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-10 mb-16">

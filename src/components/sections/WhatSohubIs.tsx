@@ -13,7 +13,7 @@ export const WhatSohubIs = () => {
         <AnimatedSection>
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
             {/* What we are */}
-            <div className="card-bento bg-white/80 backdrop-blur-sm border border-foreground/5">
+            <div className="card-bento bg-white/80 backdrop-blur-sm border border-primary/10">
               <p className="text-overline mb-6">What we are</p>
               <h2 className="text-title mb-6 text-foreground">
                 An ecosystem of focused systems.
@@ -29,7 +29,7 @@ export const WhatSohubIs = () => {
             </div>
 
             {/* What we are not */}
-            <div className="card-bento bg-white/60 backdrop-blur-sm border border-foreground/5">
+            <div className="card-bento bg-white/60 backdrop-blur-sm border border-primary/5">
               <p className="text-overline mb-6 opacity-50">What we are not</p>
               <h2 className="text-title mb-6 text-foreground/60">
                 Not a typical service company.

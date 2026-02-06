@@ -2,7 +2,7 @@ import { AnimatedSection } from '../ui/AnimatedSection';
 
 export const QuietClosing = () => {
   return (
-    <section className="py-32 md:py-40 lg:py-48 bg-foreground">
+    <section className="py-32 md:py-40 lg:py-48 bg-primary">
       <div className="container-main">
         <AnimatedSection>
           <div className="max-w-3xl mx-auto text-center">

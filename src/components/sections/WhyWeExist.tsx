@@ -12,7 +12,7 @@ export const WhyWeExist = () => {
           <div className="space-y-10">
             <p className="text-body-xl text-center prose-width mx-auto">
               Bangladesh is full of challenges — and full of people who can solve them. 
-              The gap is not ideas. <span className="text-foreground font-medium">The gap is execution.</span>
+              The gap is not ideas. <span className="text-primary font-medium">The gap is execution.</span>
             </p>
 
             <h2 className="text-headline text-center text-foreground">
@@ -32,7 +32,7 @@ export const WhyWeExist = () => {
             </p>
 
             <p className="text-body-lg">
-              Technology is the most scalable, repeatable, and reliable way to make improvement <span className="text-foreground font-medium">permanent for everyone.</span>
+              Technology is the most scalable, repeatable, and reliable way to make improvement <span className="text-primary font-medium">permanent for everyone.</span>
             </p>
 
             <p className="text-body">
