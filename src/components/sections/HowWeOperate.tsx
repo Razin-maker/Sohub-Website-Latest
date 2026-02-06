@@ -11,7 +11,7 @@ const operatingLoop = [
 
 export const HowWeOperate = () => {
   return (
-    <section id="operate" className="section-spacing bg-foreground text-white">
+    <section id="operate" className="section-spacing bg-primary text-white">
       <div className="container-main">
         <AnimatedSection>
           <div className="max-w-2xl mb-16 lg:mb-20">

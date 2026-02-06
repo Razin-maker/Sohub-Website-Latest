@@ -91,8 +91,8 @@ export default function NeuralNetworkHero({
               href={button.href}
               className={
                 button.primary
-                  ? "rounded-full bg-foreground px-7 py-3 text-sm font-semibold text-background shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
-                  : "rounded-full border border-foreground/12 bg-white/70 backdrop-blur-sm px-7 py-3 text-sm font-medium text-foreground/80 transition-all duration-300 hover:bg-white hover:border-foreground/20"
+                  ? "rounded-full bg-primary px-7 py-3 text-sm font-semibold text-primary-foreground shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
+                  : "rounded-full border border-primary/20 bg-white/70 backdrop-blur-sm px-7 py-3 text-sm font-medium text-foreground/80 transition-all duration-300 hover:bg-white hover:border-primary/40"
               }
             >
               {button.text}
