@@ -68,12 +68,12 @@ export const EcosystemExplorer = () => {
     : systems.filter(s => s.categories.includes(activeFilter));
 
   return (
-    <section id="ecosystem" className="section-spacing">
+    <section id="ecosystem" className="section-spacing bg-background">
       <div className="container-main">
         <AnimatedSection>
           <div className="text-center mb-12 lg:mb-16">
             <p className="text-overline mb-4">Our Ecosystem</p>
-            <h2 className="text-headline mb-6">
+            <h2 className="text-headline mb-6 text-foreground">
               One ecosystem. Many focused systems.
             </h2>
             <p className="text-body-xl max-w-xl mx-auto">
@@ -88,8 +88,10 @@ export const EcosystemExplorer = () => {
               <button
                 key={filter.id}
                 onClick={() => setActiveFilter(filter.id)}
-                className={`filter-pill ${
-                  activeFilter === filter.id ? 'filter-pill-active' : 'filter-pill-inactive'
+                className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                  activeFilter === filter.id 
+                    ? 'bg-foreground text-background' 
+                    : 'bg-transparent border border-foreground/10 text-foreground/60 hover:border-foreground/20 hover:text-foreground'
                 }`}
               >
                 {filter.label}
@@ -109,16 +111,16 @@ export const EcosystemExplorer = () => {
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
               >
-                <div className="card-bento group cursor-pointer h-full flex flex-col bg-background-subtle hover:bg-background">
+                <div className="group cursor-pointer h-full flex flex-col p-8 rounded-2xl bg-white border border-foreground/5 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                   <h3 className="text-xl font-semibold text-foreground mb-3 tracking-[-0.01em]">
                     {system.name}
                   </h3>
-                  <p className="text-body-sm flex-grow mb-5">
+                  <p className="text-foreground/50 flex-grow mb-5 text-sm leading-relaxed">
                     {system.purpose}
                   </p>
-                  <span className="btn-link text-sm">
+                  <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-foreground/70 group-hover:text-foreground transition-colors">
                     Explore
-                    <ArrowRight className="w-4 h-4" />
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </span>
                 </div>
               </motion.div>

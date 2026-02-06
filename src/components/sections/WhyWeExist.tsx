@@ -2,7 +2,7 @@ import { AnimatedSection } from '../ui/AnimatedSection';
 
 export const WhyWeExist = () => {
   return (
-    <section id="why" className="section-spacing bg-background-subtle">
+    <section id="why" className="section-spacing bg-background">
       <div className="container-narrow">
         <AnimatedSection>
           <p className="text-overline mb-10 text-center">Why we exist</p>
@@ -15,7 +15,7 @@ export const WhyWeExist = () => {
               The gap is not ideas. <span className="text-foreground font-medium">The gap is execution.</span>
             </p>
 
-            <h2 className="text-headline text-center" style={{ color: 'hsl(32, 96%, 51%)' }}>
+            <h2 className="text-headline text-center text-foreground">
               SOHUB exists to close that gap.
             </h2>
           </div>
@@ -42,7 +42,7 @@ export const WhyWeExist = () => {
         </AnimatedSection>
 
         <AnimatedSection delay={0.3}>
-          <div className="mt-20 pt-10 border-t border-border/60">
+          <div className="mt-20 pt-10 border-t border-border">
             <div className="grid md:grid-cols-3 gap-6 text-center">
               <p className="text-body">
                 We don't chase hype.

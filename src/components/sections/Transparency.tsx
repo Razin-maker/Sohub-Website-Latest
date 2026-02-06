@@ -1,5 +1,6 @@
 import { AnimatedSection } from '../ui/AnimatedSection';
 import { ArrowRight, BookOpen, Workflow, Award, TrendingUp, FolderOpen } from 'lucide-react';
+import { ShaderBackground } from '../ui/ShaderBackground';
 
 const resources = [
   { icon: BookOpen, label: 'Vision & Syllabus', href: '#' },
@@ -11,12 +12,17 @@ const resources = [
 
 export const Transparency = () => {
   return (
-    <section id="transparency" className="section-spacing">
-      <div className="container-main">
+    <section id="transparency" className="section-spacing relative overflow-hidden">
+      {/* Subtle shader background */}
+      <div className="absolute inset-0 opacity-40">
+        <ShaderBackground />
+      </div>
+      
+      <div className="container-main relative z-10">
         <AnimatedSection>
           <div className="text-center mb-12 lg:mb-16">
             <p className="text-overline mb-4">Transparency</p>
-            <h2 className="text-headline mb-6">Open by design.</h2>
+            <h2 className="text-headline mb-6 text-foreground">Open by design.</h2>
             <p className="text-body-lg max-w-lg mx-auto">
               We believe trust is built through visibility. Explore how we work.
             </p>
@@ -29,13 +35,13 @@ export const Transparency = () => {
               <a
                 key={resource.label}
                 href={resource.href}
-                className="group flex items-center gap-4 px-7 py-5 bg-background-subtle rounded-2xl transition-all duration-400 hover:bg-background hover:shadow-lg hover:-translate-y-1"
+                className="group flex items-center gap-4 px-7 py-5 bg-white/80 backdrop-blur-sm border border-foreground/5 rounded-2xl transition-all duration-300 hover:bg-white hover:shadow-lg hover:-translate-y-1"
               >
-                <resource.icon className="w-5 h-5 text-primary" />
+                <resource.icon className="w-5 h-5 text-foreground/60" />
                 <span className="font-semibold text-foreground">
                   {resource.label}
                 </span>
-                <ArrowRight className="w-4 h-4 text-foreground-muted transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="w-4 h-4 text-foreground/40 transition-transform group-hover:translate-x-1" />
               </a>
             ))}
           </div>
