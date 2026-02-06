@@ -139,33 +139,23 @@ const fragmentShader = `
 
     buf[0] = sigmoid(buf[0]);
     
-    // Much lighter Base44-inspired gradient
+    // 90% lighter - almost white with barely visible tint
     float luminance = buf[0].x * 0.3 + buf[0].y * 0.5 + buf[0].z * 0.2;
     
-    // Very light, airy palette
-    vec3 paleSky = vec3(0.88, 0.95, 0.99);      // Very pale sky blue
-    vec3 lightCream = vec3(0.995, 0.985, 0.975); // Almost white cream
-    vec3 softPeach = vec3(1.0, 0.97, 0.94);     // Very soft peach
+    // Almost pure white with just 10% color
+    vec3 almostWhite = vec3(0.995, 0.995, 0.995);
+    vec3 tintedWhite = vec3(0.99, 0.995, 1.0);   // Barely blue tint
+    vec3 warmWhite = vec3(1.0, 0.995, 0.99);     // Barely warm tint
     
-    // Vertical gradient - pale sky at top, soft peach at bottom
+    // Very subtle vertical gradient
     vec2 uv = vUv;
     float gradientMix = uv.y;
     
-    // Very light gradient
-    vec3 baseGradient = mix(softPeach, paleSky, gradientMix);
+    // Mix between barely warm (bottom) and barely cool (top)
+    vec3 baseGradient = mix(warmWhite, tintedWhite, gradientMix);
     
-    // Almost invisible flowing patterns - just subtle texture
-    vec3 flowColor;
-    if (luminance < 0.5) {
-      flowColor = mix(baseGradient * 0.995, baseGradient, luminance / 0.5);
-    } else {
-      flowColor = mix(baseGradient, lightCream, (luminance - 0.5) / 0.5 * 0.3);
-    }
-    
-    // Barely perceptible pulse
-    float pulse = 0.5 + 0.5 * sin(iTime * 0.3);
-    float glowIntensity = 0.004 * pulse;
-    vec3 color = flowColor + vec3(glowIntensity);
+    // Almost invisible patterns
+    vec3 color = mix(baseGradient * 0.998, almostWhite, luminance * 0.5);
     
     return vec4(color, 1.0);
   }
