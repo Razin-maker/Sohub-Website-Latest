@@ -31,7 +31,7 @@ export const Navbar = () => {
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled 
-            ? 'py-3 bg-white/80 backdrop-blur-xl border-b border-foreground/5' 
+            ? 'py-3 bg-background/95 backdrop-blur-xl border-b border-border shadow-sm' 
             : 'py-4 md:py-5 bg-transparent'
         }`}
       >
@@ -47,14 +47,14 @@ export const Navbar = () => {
               <a
                 key={link.label}
                 href={link.href}
-                className="px-4 py-2 font-medium text-[15px] rounded-full transition-all duration-300 text-foreground/60 hover:text-foreground hover:bg-foreground/5"
+                className="px-4 py-2 font-medium text-[15px] rounded-full transition-all duration-300 text-foreground-muted hover:text-foreground hover:bg-secondary"
               >
                 {link.label}
               </a>
             ))}
           </div>
 
-          {/* CTA Button */}
+          {/* CTA Button - Primary Orange */}
           <div className="hidden lg:block">
             <a
               href="#ecosystem"
@@ -67,7 +67,7 @@ export const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 rounded-full transition-colors text-foreground hover:bg-foreground/5"
+            className="lg:hidden p-2 rounded-full transition-colors text-foreground hover:bg-secondary"
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -83,7 +83,7 @@ export const Navbar = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 lg:hidden pt-20 bg-white"
+            className="fixed inset-0 z-40 lg:hidden pt-20 bg-background"
           >
             <div className="container-main py-8 flex flex-col gap-2">
               {navLinks.map((link, index) => (
@@ -93,7 +93,7 @@ export const Navbar = () => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.05, duration: 0.3 }}
-                  className="text-foreground text-2xl font-semibold py-3 hover:pl-4 transition-all"
+                  className="text-foreground text-2xl font-semibold py-3 hover:pl-4 hover:text-primary transition-all"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.label}

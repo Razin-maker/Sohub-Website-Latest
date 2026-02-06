@@ -14,10 +14,10 @@ export const People = () => {
 
         <AnimatedSection delay={0.1}>
           <div className="space-y-6 mb-10">
-            <p className="text-body-xl text-foreground-subtle">
+            <p className="text-body-xl">
               If you want shortcuts, this is not for you.
             </p>
-            <p className="text-body-xl text-foreground">
+            <p className="text-body-xl !text-foreground">
               If you want responsibility and growth — <span className="font-semibold">welcome.</span>
             </p>
           </div>

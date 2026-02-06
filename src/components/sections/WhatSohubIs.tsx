@@ -1,44 +1,38 @@
 import { AnimatedSection } from '../ui/AnimatedSection';
-import { ShaderBackground } from '../ui/ShaderBackground';
 
 export const WhatSohubIs = () => {
   return (
-    <section id="about" className="section-spacing relative overflow-hidden">
-      {/* Subtle shader background */}
-      <div className="absolute inset-0 opacity-50">
-        <ShaderBackground />
-      </div>
-      
-      <div className="container-main relative z-10">
+    <section id="about" className="section-spacing bg-background-subtle">
+      <div className="container-main">
         <AnimatedSection>
-          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
             {/* What we are */}
-            <div className="card-bento bg-white/80 backdrop-blur-sm border border-primary/10">
+            <div className="card-white">
               <p className="text-overline mb-6">What we are</p>
-              <h2 className="text-title mb-6 text-foreground">
+              <h2 className="text-title mb-6">
                 An ecosystem of focused systems.
               </h2>
               <div className="space-y-4">
-                <p className="text-body-lg text-foreground/80">
+                <p className="text-body-lg">
                   Each solves one real problem.
                 </p>
-                <p className="text-body-lg text-foreground/80">
+                <p className="text-body-lg">
                   Together, they raise the standard.
                 </p>
               </div>
             </div>
 
             {/* What we are not */}
-            <div className="card-bento bg-white/60 backdrop-blur-sm border border-primary/5">
+            <div className="card-bento">
               <p className="text-overline mb-6 opacity-50">What we are not</p>
-              <h2 className="text-title mb-6 text-foreground/60">
+              <h2 className="text-title mb-6 text-foreground-muted">
                 Not a typical service company.
               </h2>
               <div className="space-y-4">
-                <p className="text-body text-foreground/40">
+                <p className="text-body text-foreground-muted/60">
                   Not random products.
                 </p>
-                <p className="text-body text-foreground/40">
+                <p className="text-body text-foreground-muted/60">
                   Not noise.
                 </p>
               </div>

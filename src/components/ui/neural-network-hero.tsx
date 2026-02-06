@@ -27,7 +27,7 @@ export default function NeuralNetworkHero({
   const words = title.split(' ');
 
   return (
-    <section className="relative w-full h-screen min-h-screen overflow-hidden">
+    <section className="relative w-full h-screen min-h-screen overflow-hidden bg-background">
       {/* Shader Background with fade-in */}
       <ShaderBackground 
         className="w-full h-full"
@@ -41,12 +41,12 @@ export default function NeuralNetworkHero({
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-8 flex items-center gap-2 rounded-full border border-foreground/8 bg-white/80 backdrop-blur-md px-4 py-2 text-sm font-medium shadow-sm"
+          className="mb-8 flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-sm font-medium shadow-sm"
         >
           <span className="rounded-full bg-primary px-2.5 py-0.5 text-xs font-semibold text-primary-foreground">
             {badgeLabel}
           </span>
-          <span className="text-foreground/60">{badgeText}</span>
+          <span className="text-foreground-muted">{badgeText}</span>
         </motion.div>
 
         {/* Headline - Apple-style word-by-word animation */}
@@ -73,7 +73,7 @@ export default function NeuralNetworkHero({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.6 }}
-          className="mt-6 max-w-lg text-base leading-relaxed text-foreground/50 sm:text-lg md:text-xl"
+          className="mt-6 max-w-lg text-base leading-relaxed text-foreground-muted sm:text-lg md:text-xl"
         >
           {description}
         </motion.p>
@@ -92,7 +92,7 @@ export default function NeuralNetworkHero({
               className={
                 button.primary
                   ? "rounded-full bg-primary px-7 py-3 text-sm font-semibold text-primary-foreground shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
-                  : "rounded-full border border-primary/20 bg-white/70 backdrop-blur-sm px-7 py-3 text-sm font-medium text-foreground/80 transition-all duration-300 hover:bg-white hover:border-primary/40"
+                  : "rounded-full border border-border bg-background px-7 py-3 text-sm font-medium text-foreground transition-all duration-300 hover:bg-secondary hover:border-foreground-muted/30"
               }
             >
               {button.text}
@@ -107,14 +107,14 @@ export default function NeuralNetworkHero({
           transition={{ duration: 0.7, delay: 0.9 }}
           className="mt-16"
         >
-          <p className="text-xs uppercase tracking-[0.15em] text-foreground/35 mb-4">
+          <p className="text-xs uppercase tracking-[0.15em] text-foreground-muted/60 mb-4">
             Our focus:
           </p>
           <div className="flex flex-wrap items-center justify-center gap-2">
             {microDetails.map((detail, index) => (
               <span 
                 key={index} 
-                className="rounded-full border border-foreground/8 bg-white/60 px-4 py-2 text-xs font-medium text-foreground/60 transition-all duration-300 hover:bg-white hover:border-foreground/15"
+                className="rounded-full border border-border bg-background px-4 py-2 text-xs font-medium text-foreground-muted transition-all duration-300 hover:bg-secondary hover:border-foreground-muted/30"
               >
                 {detail}
               </span>

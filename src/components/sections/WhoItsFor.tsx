@@ -31,7 +31,7 @@ const audiences = [
 
 export const WhoItsFor = () => {
   return (
-    <section className="section-spacing bg-background-subtle">
+    <section className="section-spacing bg-background">
       <div className="container-main">
         <AnimatedSection>
           <div className="text-center mb-16">
@@ -43,12 +43,11 @@ export const WhoItsFor = () => {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
           {audiences.map((audience, index) => (
             <AnimatedSection key={audience.title} delay={index * 0.08}>
-              <div className="card-bento bg-background text-center h-full group">
+              <div className="card-white text-center h-full group">
                 <div 
-                  className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-transform duration-300 group-hover:scale-110"
-                  style={{ background: 'hsl(32 96% 51% / 0.1)' }}
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-transform duration-300 group-hover:scale-110 bg-primary/10"
                 >
-                  <audience.icon className="w-6 h-6" style={{ color: 'hsl(32, 96%, 51%)' }} />
+                  <audience.icon className="w-6 h-6 text-primary" />
                 </div>
                 <h3 className="text-lg font-semibold text-foreground mb-3">
                   {audience.title}

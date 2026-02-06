@@ -15,7 +15,7 @@ export const WhyWeExist = () => {
               The gap is not ideas. <span className="text-primary font-medium">The gap is execution.</span>
             </p>
 
-            <h2 className="text-headline text-center text-foreground">
+            <h2 className="text-headline text-center">
               SOHUB exists to close that gap.
             </h2>
           </div>

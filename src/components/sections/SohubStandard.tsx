@@ -33,8 +33,8 @@ export const SohubStandard = () => {
         <div className="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-4xl mx-auto">
           {standards.map((standard, index) => (
             <AnimatedSection key={standard.title} delay={index * 0.1}>
-              <div className="card-bento bg-background h-full border border-primary/10 hover:border-primary/20">
-                <h3 className="text-subtitle text-foreground mb-4">
+              <div className="card-white h-full">
+                <h3 className="text-subtitle mb-4">
                   {standard.title}
                 </h3>
                 <p className="text-body">
