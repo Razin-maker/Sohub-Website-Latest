@@ -205,27 +205,8 @@ function ShaderBackground() {
     far: 1000 
   }), []);
   
-  useGSAP(
-    () => {
-      if (!canvasRef.current) return;
-      
-      gsap.set(canvasRef.current, {
-        filter: 'blur(20px)',
-        scale: 1.1,
-        autoAlpha: 0.7
-      });
-      
-      gsap.to(canvasRef.current, {
-        filter: 'blur(0px)',
-        scale: 1,
-        autoAlpha: 1,
-        duration: 1.5,
-        ease: 'power3.out',
-        delay: 0.3
-      });
-    },
-    { scope: canvasRef }
-  );
+  // Simplified - no GSAP animation that could hide the canvas
+  
   
   return (
     <div 
