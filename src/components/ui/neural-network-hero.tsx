@@ -139,35 +139,32 @@ const fragmentShader = `
 
     buf[0] = sigmoid(buf[0]);
     
-    // Base44-inspired sky blue to warm peach gradient
+    // Much lighter Base44-inspired gradient
     float luminance = buf[0].x * 0.3 + buf[0].y * 0.5 + buf[0].z * 0.2;
     
-    // Base44 palette: sky blue → soft peach/cream
-    vec3 skyBlue = vec3(0.73, 0.88, 0.96);      // #bae0f5 light sky
-    vec3 paleBlue = vec3(0.85, 0.93, 0.98);     // lighter transition
-    vec3 warmCream = vec3(0.99, 0.96, 0.92);    // warm cream
-    vec3 softPeach = vec3(1.0, 0.93, 0.85);     // #ffedda soft peach
+    // Very light, airy palette
+    vec3 paleSky = vec3(0.88, 0.95, 0.99);      // Very pale sky blue
+    vec3 lightCream = vec3(0.995, 0.985, 0.975); // Almost white cream
+    vec3 softPeach = vec3(1.0, 0.97, 0.94);     // Very soft peach
     
-    // Vertical gradient simulation via luminance - sky on top, peach on bottom
+    // Vertical gradient - pale sky at top, soft peach at bottom
     vec2 uv = vUv;
-    float gradientMix = uv.y; // 0 at bottom, 1 at top
+    float gradientMix = uv.y;
     
-    // Sky blue at top, warm peach at bottom
-    vec3 baseGradient = mix(softPeach, skyBlue, gradientMix);
+    // Very light gradient
+    vec3 baseGradient = mix(softPeach, paleSky, gradientMix);
     
-    // Subtle flowing patterns
+    // Almost invisible flowing patterns - just subtle texture
     vec3 flowColor;
-    if (luminance < 0.4) {
-      flowColor = mix(baseGradient * 0.98, baseGradient, luminance / 0.4);
-    } else if (luminance < 0.7) {
-      flowColor = mix(baseGradient, baseGradient * 1.02, (luminance - 0.4) / 0.3);
+    if (luminance < 0.5) {
+      flowColor = mix(baseGradient * 0.995, baseGradient, luminance / 0.5);
     } else {
-      flowColor = mix(baseGradient * 1.02, vec3(1.0), (luminance - 0.7) / 0.3 * 0.15);
+      flowColor = mix(baseGradient, lightCream, (luminance - 0.5) / 0.5 * 0.3);
     }
     
-    // Very subtle pulsing - almost imperceptible like Base44
-    float pulse = 0.5 + 0.5 * sin(iTime * 0.4);
-    float glowIntensity = 0.008 * pulse;
+    // Barely perceptible pulse
+    float pulse = 0.5 + 0.5 * sin(iTime * 0.3);
+    float glowIntensity = 0.004 * pulse;
     vec3 color = flowColor + vec3(glowIntensity);
     
     return vec4(color, 1.0);
