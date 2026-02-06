@@ -1,4 +1,5 @@
 import { AnimatedSection } from '../ui/AnimatedSection';
+import logoWhite from '@/assets/logo-white.svg';
 
 const footerSections = [
   {
@@ -46,7 +47,7 @@ export const Footer = () => {
         <AnimatedSection>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-10 mb-16">
             <div className="col-span-2 md:col-span-4 lg:col-span-1 mb-4 lg:mb-0">
-              <span className="text-2xl font-bold tracking-[-0.02em]">SOHUB</span>
+              <img src={logoWhite} alt="SOHUB" className="h-6 w-auto" />
               <p className="text-white/50 mt-5 text-sm leading-relaxed max-w-xs">
                 Solution Hub Technologies
                 <br />
