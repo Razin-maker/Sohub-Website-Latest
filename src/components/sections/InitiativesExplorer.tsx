@@ -60,7 +60,7 @@ const systems = [
   },
 ];
 
-export const EcosystemExplorer = () => {
+export const InitiativesExplorer = () => {
   const [activeFilter, setActiveFilter] = useState('all');
 
   const filteredSystems = activeFilter === 'all' 
@@ -68,13 +68,13 @@ export const EcosystemExplorer = () => {
     : systems.filter(s => s.categories.includes(activeFilter));
 
   return (
-    <section id="ecosystem" className="section-spacing bg-background">
+    <section id="initiatives" className="section-spacing bg-background">
       <div className="container-main">
         <AnimatedSection>
           <div className="text-center mb-12 lg:mb-16">
-            <p className="text-overline mb-4">Our Ecosystem</p>
+            <p className="text-overline mb-4">Our Initiatives</p>
             <h2 className="text-headline mb-6">
-              One ecosystem. Many focused systems.
+              One vision. Many focused initiatives.
             </h2>
             <p className="text-body-xl max-w-xl mx-auto">
               Explore what matters to you. Go deep — at your pace.

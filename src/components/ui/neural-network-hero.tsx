@@ -19,7 +19,7 @@ export default function NeuralNetworkHero({
   badgeText = "Solution Hub Technologies",
   badgeLabel = "SOHUB",
   ctaButtons = [
-    { text: "Explore ecosystem", href: "#ecosystem", primary: true },
+    { text: "Explore initiatives", href: "#initiatives", primary: true },
     { text: "Why we exist", href: "#why" }
   ],
   microDetails = ["Discipline", "Transparency", "Results"]
@@ -33,6 +33,74 @@ export default function NeuralNetworkHero({
         className="w-full h-full"
         animate={true}
       />
+
+      {/* Animated Floating Shapes */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Large floating circle - top right */}
+        <motion.div
+          className="absolute -top-20 -right-20 w-80 h-80 md:w-[500px] md:h-[500px] rounded-full opacity-[0.03]"
+          style={{ background: 'hsl(var(--primary))' }}
+          animate={{
+            y: [0, 30, 0],
+            x: [0, -20, 0],
+            scale: [1, 1.05, 1],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+        />
+        
+        {/* Medium floating circle - bottom left */}
+        <motion.div
+          className="absolute -bottom-32 -left-32 w-64 h-64 md:w-96 md:h-96 rounded-full opacity-[0.04]"
+          style={{ background: 'hsl(var(--primary))' }}
+          animate={{
+            y: [0, -40, 0],
+            x: [0, 30, 0],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            delay: 2,
+          }}
+        />
+        
+        {/* Small floating circle - center left */}
+        <motion.div
+          className="absolute top-1/3 left-10 md:left-20 w-32 h-32 md:w-48 md:h-48 rounded-full opacity-[0.02]"
+          style={{ background: 'hsl(var(--primary))' }}
+          animate={{
+            y: [0, 20, 0],
+            scale: [1, 1.15, 1],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            delay: 4,
+          }}
+        />
+        
+        {/* Tiny accent circle - center right */}
+        <motion.div
+          className="absolute top-1/2 right-16 md:right-32 w-20 h-20 md:w-32 md:h-32 rounded-full opacity-[0.025]"
+          style={{ background: 'hsl(var(--primary))' }}
+          animate={{
+            y: [0, -25, 0],
+            x: [0, -15, 0],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            delay: 1,
+          }}
+        />
+      </div>
 
       {/* Content */}
       <div className="relative z-10 flex min-h-screen w-full flex-col items-center justify-center px-6 md:px-8 text-center max-w-7xl mx-auto">

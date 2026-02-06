@@ -10,7 +10,7 @@ export const WhatSohubIs = () => {
             <div className="card-white">
               <p className="text-overline mb-6">What we are</p>
               <h2 className="text-title mb-6">
-                An ecosystem of focused systems.
+                A hub of focused initiatives.
               </h2>
               <div className="space-y-4">
                 <p className="text-body-lg">
