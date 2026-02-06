@@ -3,7 +3,7 @@ import { Hero } from '@/components/sections/Hero';
 import { WhyWeExist } from '@/components/sections/WhyWeExist';
 import { WhatSohubIs } from '@/components/sections/WhatSohubIs';
 import { SohubStandard } from '@/components/sections/SohubStandard';
-import { EcosystemExplorer } from '@/components/sections/EcosystemExplorer';
+import { InitiativesExplorer } from '@/components/sections/InitiativesExplorer';
 import { HowWeOperate } from '@/components/sections/HowWeOperate';
 import { WhoItsFor } from '@/components/sections/WhoItsFor';
 import { Transparency } from '@/components/sections/Transparency';
@@ -20,7 +20,7 @@ const Index = () => {
         <WhyWeExist />
         <WhatSohubIs />
         <SohubStandard />
-        <EcosystemExplorer />
+        <InitiativesExplorer />
         <HowWeOperate />
         <WhoItsFor />
         <Transparency />

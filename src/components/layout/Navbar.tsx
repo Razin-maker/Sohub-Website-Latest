@@ -4,7 +4,7 @@ import { Menu, X } from 'lucide-react';
 import logoOrange from '@/assets/logo-orange.svg';
 
 const navLinks = [
-  { label: 'Ecosystem', href: '#ecosystem' },
+  { label: 'Initiatives', href: '#initiatives' },
   { label: 'How we operate', href: '#operate' },
   { label: 'Transparency', href: '#transparency' },
   { label: 'About', href: '#about' },
@@ -57,10 +57,10 @@ export const Navbar = () => {
           {/* CTA Button - Primary Orange */}
           <div className="hidden lg:block">
             <a
-              href="#ecosystem"
+              href="#initiatives"
               className="px-6 py-2.5 font-semibold text-[15px] rounded-full transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 bg-primary text-primary-foreground"
             >
-              Explore ecosystem
+              Explore initiatives
             </a>
           </div>
 
@@ -100,14 +100,14 @@ export const Navbar = () => {
                 </motion.a>
               ))}
               <motion.a
-                href="#ecosystem"
+                href="#initiatives"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3, duration: 0.3 }}
                 className="mt-6 px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-full text-center text-lg"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Explore ecosystem
+                Explore initiatives
               </motion.a>
             </div>
           </motion.div>

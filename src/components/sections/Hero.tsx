@@ -8,7 +8,7 @@ export const Hero = () => {
       badgeLabel="SOHUB"
       badgeText="Solution Hub Technologies"
       ctaButtons={[
-        { text: "Explore ecosystem", href: "#ecosystem", primary: true },
+        { text: "Explore initiatives", href: "#initiatives", primary: true },
         { text: "Why we exist", href: "#why" },
         { text: "How we operate", href: "#operate" }
       ]}
