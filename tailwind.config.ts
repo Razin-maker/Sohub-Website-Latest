@@ -14,14 +14,16 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+        sans: ['DM Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        "background-subtle": "hsl(var(--background-subtle))",
+        background: {
+          DEFAULT: "hsl(var(--background))",
+          subtle: "hsl(var(--background-subtle))",
+        },
         foreground: {
           DEFAULT: "hsl(var(--foreground))",
           muted: "hsl(var(--foreground-muted))",
@@ -55,9 +57,15 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        link: "hsl(var(--link))",
         sohub: {
           primary: "hsl(var(--sohub-primary))",
           "primary-dark": "hsl(var(--sohub-primary-dark))",
+        },
+        footer: {
+          bg: "hsl(var(--footer-bg))",
+          text: "hsl(var(--footer-text))",
+          accent: "hsl(var(--footer-accent))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",

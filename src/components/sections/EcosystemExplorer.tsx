@@ -73,7 +73,7 @@ export const EcosystemExplorer = () => {
         <AnimatedSection>
           <div className="text-center mb-12 lg:mb-16">
             <p className="text-overline mb-4">Our Ecosystem</p>
-            <h2 className="text-headline mb-6 text-foreground">
+            <h2 className="text-headline mb-6">
               One ecosystem. Many focused systems.
             </h2>
             <p className="text-body-xl max-w-xl mx-auto">
@@ -88,10 +88,10 @@ export const EcosystemExplorer = () => {
               <button
                 key={filter.id}
                 onClick={() => setActiveFilter(filter.id)}
-                className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                className={`filter-pill ${
                   activeFilter === filter.id 
-                    ? 'bg-primary text-primary-foreground' 
-                    : 'bg-transparent border border-foreground/10 text-foreground/60 hover:border-primary/30 hover:text-primary'
+                    ? 'filter-pill-active' 
+                    : 'filter-pill-inactive'
                 }`}
               >
                 {filter.label}
@@ -111,14 +111,14 @@ export const EcosystemExplorer = () => {
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
               >
-                <div className="group cursor-pointer h-full flex flex-col p-8 rounded-2xl bg-white border border-foreground/5 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:border-primary/20">
+                <div className="group cursor-pointer h-full flex flex-col p-8 rounded-2xl bg-background border border-border transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                   <h3 className="text-xl font-semibold text-foreground mb-3 tracking-[-0.01em]">
                     {system.name}
                   </h3>
-                  <p className="text-foreground/50 flex-grow mb-5 text-sm leading-relaxed">
+                  <p className="text-foreground-muted flex-grow mb-5 text-sm leading-relaxed">
                     {system.purpose}
                   </p>
-                  <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary group-hover:text-primary transition-colors">
+                  <span className="link-primary group-hover:gap-2.5">
                     Explore
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </span>
