@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronRight } from 'lucide-react';
 import logoOrange from '@/assets/logo-orange.svg';
 
 // Menu data with images
@@ -66,6 +66,7 @@ export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const [expandedMobileMenu, setExpandedMobileMenu] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -74,6 +75,18 @@ export const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
 
   return (
     <>
@@ -91,7 +104,7 @@ export const Navbar = () => {
         <div className="container-main flex items-center justify-between">
           {/* Logo */}
           <a href="#" className="flex items-center gap-3 group z-10">
-            <img src={logoOrange} alt="SOHUB" className="h-6 md:h-7 w-auto" />
+            <img src={logoOrange} alt="SOHUB" className="h-5 sm:h-6 md:h-7 w-auto" />
           </a>
 
           {/* Desktop Navigation */}
@@ -132,11 +145,11 @@ export const Navbar = () => {
             className="lg:hidden p-2 rounded-full transition-colors text-foreground hover:bg-secondary z-10"
             aria-label="Toggle menu"
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
 
-        {/* Mega Menu Dropdown */}
+        {/* Desktop Mega Menu Dropdown */}
         <AnimatePresence>
           {activeMenu && (
             <motion.div
@@ -144,7 +157,7 @@ export const Navbar = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
-              className="absolute top-full left-0 right-0 bg-background border-b border-border shadow-xl"
+              className="absolute top-full left-0 right-0 bg-background border-b border-border shadow-xl hidden lg:block"
               onMouseEnter={() => setActiveMenu(activeMenu)}
               onMouseLeave={() => setActiveMenu(null)}
             >
@@ -212,7 +225,7 @@ export const Navbar = () => {
         </AnimatePresence>
       </motion.nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Full Screen */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -220,57 +233,99 @@ export const Navbar = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 lg:hidden pt-20 bg-background overflow-y-auto"
+            className="fixed inset-0 z-40 lg:hidden bg-background"
           >
-            <div className="container-main py-8 flex flex-col gap-6">
-              {menuItems.map((item, index) => (
-                <motion.div
-                  key={item.label}
+            {/* Mobile menu header spacing */}
+            <div className="h-16" />
+            
+            <div className="h-[calc(100vh-4rem)] overflow-y-auto">
+              <div className="px-5 py-6 flex flex-col gap-1">
+                {menuItems.map((item, index) => (
+                  <motion.div
+                    key={item.label}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.05, duration: 0.3 }}
+                    className="border-b border-border/50"
+                  >
+                    <button
+                      onClick={() => setExpandedMobileMenu(expandedMobileMenu === item.label ? null : item.label)}
+                      className="w-full flex items-center justify-between py-4 text-foreground text-lg font-semibold"
+                    >
+                      {item.label}
+                      <motion.div
+                        animate={{ rotate: expandedMobileMenu === item.label ? 90 : 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <ChevronRight className="w-5 h-5 text-foreground-muted" />
+                      </motion.div>
+                    </button>
+                    
+                    <AnimatePresence>
+                      {expandedMobileMenu === item.label && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="pb-4 space-y-3">
+                            {/* Submenu items with images - horizontal scroll on mobile */}
+                            <div className="flex gap-3 overflow-x-auto pb-3 -mx-5 px-5 scrollbar-hide">
+                              {item.submenu.map((subItem) => (
+                                <a
+                                  key={subItem.title}
+                                  href={subItem.href}
+                                  className="flex-shrink-0 w-40 group"
+                                  onClick={() => setIsMobileMenuOpen(false)}
+                                >
+                                  <div className="relative overflow-hidden rounded-lg mb-2 bg-background-subtle">
+                                    <img
+                                      src={subItem.image}
+                                      alt={subItem.title}
+                                      className="w-full aspect-[4/3] object-cover"
+                                    />
+                                  </div>
+                                  <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors line-clamp-1">
+                                    {subItem.title}
+                                  </span>
+                                </a>
+                              ))}
+                            </div>
+                            
+                            {/* Quick links */}
+                            <div className="flex flex-wrap gap-2 pt-2">
+                              {item.links.map((link) => (
+                                <a
+                                  key={link.label}
+                                  href={link.href}
+                                  className="text-sm text-foreground-muted hover:text-primary transition-colors"
+                                  onClick={() => setIsMobileMenuOpen(false)}
+                                >
+                                  {link.label}
+                                </a>
+                              ))}
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+                ))}
+                
+                {/* CTA Button */}
+                <motion.a
+                  href="#contact"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.05, duration: 0.3 }}
-                  className="border-b border-border pb-6 last:border-0"
+                  transition={{ delay: 0.25, duration: 0.3 }}
+                  className="mt-6 px-6 py-4 bg-primary text-primary-foreground font-semibold rounded-full text-center"
+                  onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  <a
-                    href={item.href}
-                    className="text-foreground text-2xl font-semibold hover:text-primary transition-all block mb-4"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {item.label}
-                  </a>
-                  <div className="grid grid-cols-2 gap-3">
-                    {item.submenu.slice(0, 2).map((subItem) => (
-                      <a
-                        key={subItem.title}
-                        href={subItem.href}
-                        className="group"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
-                        <div className="relative overflow-hidden rounded-lg mb-2 bg-background-subtle">
-                          <img
-                            src={subItem.image}
-                            alt={subItem.title}
-                            className="w-full aspect-video object-cover"
-                          />
-                        </div>
-                        <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
-                          {subItem.title}
-                        </span>
-                      </a>
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
-              <motion.a
-                href="#contact"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.3, duration: 0.3 }}
-                className="mt-4 px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-full text-center text-lg"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Contact Us
-              </motion.a>
+                  Contact Us
+                </motion.a>
+              </div>
             </div>
           </motion.div>
         )}
