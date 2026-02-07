@@ -42,7 +42,7 @@ export default function NeuralNetworkHero({
   const orbOpacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   return (
-    <section 
+    <section
       ref={containerRef}
       className="relative w-full min-h-screen overflow-hidden bg-background"
     >
@@ -197,10 +197,10 @@ export default function NeuralNetworkHero({
                   key={index}
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ 
-                    duration: 0.5, 
+                  transition={{
+                    duration: 0.5,
                     delay: 1 + index * 0.1,
-                    ease: appleEase 
+                    ease: appleEase
                   }}
                   className="rounded-full bg-white/60 backdrop-blur-sm border border-border/30 px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-medium text-foreground-muted transition-all duration-300 hover:bg-white hover:border-border hover:text-foreground"
                 >
