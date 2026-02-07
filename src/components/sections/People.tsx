@@ -3,31 +3,28 @@ import { ArrowRight } from 'lucide-react';
 
 export const People = () => {
   return (
-    <section className="section-spacing bg-background-subtle">
-      <div className="container-narrow text-center">
+    <section id="people" className="py-24 bg-white relative overflow-hidden">
+      <div className="container-main text-center">
         <AnimatedSection>
-          <p className="text-overline mb-4">Join Us</p>
-          <h2 className="text-headline mb-8">
-            For people who want to build — not just work.
-          </h2>
-        </AnimatedSection>
+          <div className="max-w-2xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-normal tracking-tight text-foreground mb-6">
+              For people who want to build — not just work.
+            </h2>
+            <p className="text-lg text-foreground-muted mb-8 text-balance">
+              If you want shortcuts, SOHUB is not for you. <br />
+              If you want to learn fast, own outcomes, and grow through real responsibility — welcome.
+            </p>
 
-        <AnimatedSection delay={0.1}>
-          <div className="space-y-6 mb-10">
-            <p className="text-body-xl">
-              If you want shortcuts, this is not for you.
-            </p>
-            <p className="text-body-xl !text-foreground">
-              If you want responsibility and growth — <span className="font-semibold">welcome.</span>
-            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a href="#" className="px-8 py-3.5 bg-foreground text-background rounded-full font-semibold hover:bg-black/80 transition-all flex items-center gap-2">
+                Work with SOHUB
+                <ArrowRight className="w-4 h-4" />
+              </a>
+              <a href="#" className="px-8 py-3.5 bg-secondary text-foreground rounded-full font-medium hover:bg-secondary/70 transition-all">
+                Learn our standards
+              </a>
+            </div>
           </div>
-        </AnimatedSection>
-
-        <AnimatedSection delay={0.2}>
-          <a href="#contact" className="btn-primary inline-flex">
-            Join the team
-            <ArrowRight className="w-5 h-5" />
-          </a>
         </AnimatedSection>
       </div>
     </section>

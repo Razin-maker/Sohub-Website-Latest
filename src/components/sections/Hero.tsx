@@ -10,7 +10,7 @@ export const Hero = () => {
       ctaButtons={[
         { text: "Explore initiatives", href: "#initiatives", primary: true },
         { text: "Why we exist", href: "#why" },
-        { text: "How we operate", href: "#operate" }
+        { text: "Our approach", href: "#approach" }
       ]}
       microDetails={["Discipline", "Transparency", "Results"]}
     />

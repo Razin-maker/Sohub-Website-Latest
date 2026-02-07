@@ -1,85 +1,50 @@
 import { AnimatedSection } from '../ui/AnimatedSection';
-import logoWhite from '@/assets/logo-white.svg';
-
-const footerSections = [
-  {
-    title: 'Ecosystem',
-    links: [
-      { label: 'CONNECT', href: '#' },
-      { label: 'O-MAMA', href: '#' },
-      { label: 'EMP', href: '#' },
-      { label: 'TOLPAR', href: '#' },
-      { label: 'AI', href: '#' },
-    ],
-  },
-  {
-    title: 'Resources',
-    links: [
-      { label: 'Vision & Syllabus', href: '#' },
-      { label: 'Work Model', href: '#' },
-      { label: 'Standards', href: '#' },
-      { label: 'Progress', href: '#' },
-    ],
-  },
-  {
-    title: 'Company',
-    links: [
-      { label: 'About', href: '#about' },
-      { label: 'How We Operate', href: '#operate' },
-      { label: 'Transparency', href: '#transparency' },
-      { label: 'Contact', href: '#contact' },
-    ],
-  },
-  {
-    title: 'Connect',
-    links: [
-      { label: 'Join the Team', href: '#' },
-      { label: 'Partner With Us', href: '#' },
-      { label: 'Press', href: '#' },
-    ],
-  },
-];
+import logoOrange from '@/assets/logo-orange.svg';
+import { ArrowUpRight } from 'lucide-react';
 
 export const Footer = () => {
   return (
-    <footer id="contact" className="bg-footer-bg py-20 md:py-24">
-      <div className="container-main">
+    <footer id="contact" className="bg-footer-bg relative overflow-hidden py-24 md:py-32">
+      {/* Subtle top gradient line */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-black/5 to-transparent" />
+
+      <div className="container-main relative z-10 text-center md:text-left">
         <AnimatedSection>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-10 mb-16">
-            <div className="col-span-2 md:col-span-4 lg:col-span-1 mb-4 lg:mb-0">
-              <img src={logoWhite} alt="SOHUB" className="h-6 w-auto" />
-              <p className="text-footer-text/50 mt-5 text-sm leading-relaxed max-w-xs">
-                Solution Hub Technologies
-                <br />
-                Building the future of Bangladesh.
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-12 mb-20">
+            <div>
+              <img src={logoOrange} alt="SOHUB" className="h-8 w-auto mb-8 mx-auto md:mx-0" />
+              <h2 className="text-3xl md:text-5xl font-medium tracking-tight text-footer-text mb-4 uppercase">
+                Begin Different.<br /> Win Different.
+              </h2>
+              <p className="text-footer-text/60 max-w-md text-lg">
+                We’re not here to follow trends. We’re here to raise standards.
               </p>
             </div>
-            {footerSections.map((section) => (
-              <div key={section.title}>
-                <h4 className="font-semibold mb-5 text-footer-text/80 text-sm uppercase tracking-wide">{section.title}</h4>
-                <ul className="space-y-3">
-                  {section.links.map((link) => (
-                    <li key={link.label}>
-                      <a
-                        href={link.href}
-                        className="text-sm text-footer-text/50 hover:text-footer-accent transition-colors duration-300"
-                      >
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+
+            <div className="flex flex-col gap-4 mx-auto md:mx-0">
+              <a href="#initiatives" className="text-lg md:text-xl font-medium text-primary hover:text-primary/80 transition-colors flex items-center gap-2 justify-center md:justify-start">
+                Explore the ecosystem
+                <ArrowUpRight className="w-5 h-5" />
+              </a>
+              <a href="#" className="text-lg md:text-xl font-medium text-footer-text hover:text-primary transition-colors flex items-center gap-2 justify-center md:justify-start">
+                Read Vision 2026
+                <ArrowUpRight className="w-5 h-5" />
+              </a>
+              <a href="#contact" className="text-lg md:text-xl font-medium text-footer-text hover:text-primary transition-colors flex items-center gap-2 justify-center md:justify-start">
+                Contact
+                <ArrowUpRight className="w-5 h-5" />
+              </a>
+            </div>
           </div>
 
           <div className="pt-10 border-t border-footer-text/10 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-footer-text/40">
-              © {new Date().getFullYear()} SOHUB — Solution Hub Technologies. All rights reserved.
+            <p className="text-sm text-footer-text/50">
+              © {new Date().getFullYear()} SOHUB — Solution Hub Technologies.
             </p>
-            <div className="flex gap-8 text-sm text-footer-text/40">
-              <a href="#" className="hover:text-footer-accent transition-colors duration-300">Privacy</a>
-              <a href="#" className="hover:text-footer-accent transition-colors duration-300">Terms</a>
+            <div className="flex gap-8 text-sm text-footer-text/50">
+              <a href="#" className="hover:text-primary transition-colors duration-300">Privacy</a>
+              <a href="#" className="hover:text-primary transition-colors duration-300">Terms</a>
+              <a href="#" className="hover:text-primary transition-colors duration-300">Sitemap</a>
             </div>
           </div>
         </AnimatedSection>

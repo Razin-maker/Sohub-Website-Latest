@@ -1,64 +1,82 @@
 import { AnimatedSection } from '../ui/AnimatedSection';
-import { ArrowRight } from 'lucide-react';
+import { Eye, Globe, Sliders, Play, TrendingUp } from 'lucide-react';
+import { motion } from 'framer-motion';
 
-const operatingLoop = [
-  { step: 'Observe', num: '01' },
-  { step: 'Learn Globally', num: '02' },
-  { step: 'Normalize', num: '03' },
-  { step: 'Run', num: '04' },
-  { step: 'Improve', num: '05' },
+const steps = [
+  {
+    icon: Eye,
+    title: "Observe",
+    desc: "Observe real problems as they exist (not reported, not requested)."
+  },
+  {
+    icon: Globe,
+    title: "Learn Globally",
+    desc: "Learn from systems already working globally."
+  },
+  {
+    icon: Sliders,
+    title: "Normalize",
+    desc: "Normalize technology for Bangladesh — cost, infrastructure, behavior."
+  },
+  {
+    icon: Play,
+    title: "Run",
+    desc: "Run in the real Bangladesh."
+  },
+  {
+    icon: TrendingUp,
+    title: "Improve",
+    desc: "Improve continuously."
+  }
 ];
 
 export const HowWeOperate = () => {
   return (
-    <section id="operate" className="section-spacing bg-footer-bg">
+    <section id="operate" className="py-24 bg-secondary/5 overflow-hidden">
       <div className="container-main">
         <AnimatedSection>
-          <div className="max-w-2xl mb-16 lg:mb-20">
-            <p className="text-overline mb-4 !text-footer-accent">Our Approach</p>
-            <h2 className="text-headline !text-footer-text mb-6">
-              How we move from reality to results
+          <div className="text-center mb-16 max-w-3xl mx-auto">
+            <p className="text-overline mb-4 text-foreground-muted">How we operate</p>
+            <h2 className="text-3xl md:text-4xl font-normal tracking-tight text-foreground mb-6">
+              How we move from reality to results.
             </h2>
-            <p className="text-body-xl !text-footer-text/70">
-              We don't accept the idea that Bangladesh is "50 years behind". 
-              Progress is not about time — it's about starting.
+            <p className="text-lg text-foreground-muted">
+              We look outward to understand what works. Then we do something simple — and difficult. We start.
             </p>
           </div>
         </AnimatedSection>
 
-        <AnimatedSection delay={0.15}>
-          <div className="grid sm:grid-cols-2 md:grid-cols-5 gap-4 mb-20">
-            {operatingLoop.map((item, index) => (
-              <div 
-                key={item.step} 
-                className="flex items-center gap-4 md:flex-col md:text-center p-6 rounded-2xl bg-footer-text/5 backdrop-blur-sm"
-              >
-                <span className="text-sm font-medium text-footer-text/40">{item.num}</span>
-                <span className="text-lg font-semibold text-footer-text">{item.step}</span>
-                {index < operatingLoop.length - 1 && (
-                  <ArrowRight className="hidden md:block w-4 h-4 text-footer-text/30 absolute -right-6" />
-                )}
-              </div>
+        {/* Process Timeline */}
+        <div className="relative max-w-5xl mx-auto">
+          {/* Connector Line (Desktop) */}
+          <div className="absolute top-12 left-0 right-0 h-0.5 bg-border/50 hidden md:block" />
+
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
+            {steps.map((step, index) => (
+              <AnimatedSection key={index} delay={index * 0.1}>
+                <div className="relative group flex flex-col items-center md:items-start text-center md:text-left">
+
+                  {/* Icon Node */}
+                  <motion.div
+                    whileHover={{ scale: 1.1, backgroundColor: "#fff" }}
+                    className="w-24 h-24 bg-white rounded-full border-4 border-background shadow-lg z-10 flex items-center justify-center mb-6 relative"
+                  >
+                    <div className="absolute inset-0 rounded-full border border-primary/20" />
+                    <step.icon className="w-8 h-8 text-primary" />
+
+                    {/* Step Number Badge */}
+                    <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-foreground text-background font-bold flex items-center justify-center text-sm">
+                      {index + 1}
+                    </div>
+                  </motion.div>
+
+                  <h3 className="text-lg font-medium text-foreground mb-2 px-2">{step.title}</h3>
+                  <p className="text-sm text-foreground-muted px-2">{step.desc}</p>
+                </div>
+              </AnimatedSection>
             ))}
           </div>
-        </AnimatedSection>
-
-        <AnimatedSection delay={0.3}>
-          <div className="grid md:grid-cols-3 gap-8 pt-12 border-t border-footer-text/10">
-            <div className="text-center md:text-left">
-              <p className="text-footer-text/50 mb-2 text-sm">While others wait for permission,</p>
-              <p className="text-xl font-semibold text-footer-text">we start.</p>
-            </div>
-            <div className="text-center md:text-left">
-              <p className="text-footer-text/50 mb-2 text-sm">While others add complexity,</p>
-              <p className="text-xl font-semibold text-footer-text">we normalize.</p>
-            </div>
-            <div className="text-center md:text-left">
-              <p className="text-footer-text/50 mb-2 text-sm">While others hide behind excuses,</p>
-              <p className="text-xl font-semibold text-footer-text">we build.</p>
-            </div>
-          </div>
-        </AnimatedSection>
+        </div>
       </div>
     </section>
   );

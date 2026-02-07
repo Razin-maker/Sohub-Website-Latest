@@ -1,61 +1,98 @@
 import { AnimatedSection } from '../ui/AnimatedSection';
+import { ArrowRight, BarChart3, Globe, Heart } from 'lucide-react';
 
 export const WhyWeExist = () => {
   return (
-    <section id="why" className="section-spacing bg-background">
-      <div className="container-narrow">
-        <AnimatedSection>
-          <p className="text-overline mb-10 text-center">Why we exist</p>
-        </AnimatedSection>
+    <section id="why" className="section-spacing bg-background relative overflow-hidden flex items-center min-h-[85vh]">
 
-        <AnimatedSection delay={0.1}>
-          <div className="space-y-10">
-            <p className="text-body-xl text-center prose-width mx-auto">
-              Bangladesh is full of challenges — and full of people who can solve them. 
-              The gap is not ideas. <span className="text-primary font-medium">The gap is execution.</span>
-            </p>
+      {/* Background Decor */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-secondary/20 rounded-full blur-[120px] opacity-50 pointer-events-none translate-x-1/3 -translate-y-1/3" />
 
-            <h2 className="text-headline text-center">
-              SOHUB exists to close that gap.
-            </h2>
-          </div>
-        </AnimatedSection>
+      <div className="container-main relative z-10 w-full">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-        <AnimatedSection delay={0.2}>
-          <div className="mt-16 space-y-8 prose-width mx-auto">
-            <p className="text-body-lg">
-              We believe problems can be solved in many ways. We chose technology because it is our passion.
-            </p>
+          {/* Left: The Manifesto */}
+          <AnimatedSection>
+            <div className="max-w-xl">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-wider uppercase mb-8">
+                <Globe className="w-3 h-3" />
+                <span>The Mission</span>
+              </div>
 
-            <p className="text-body-lg">
-              We are a young, technology-enthusiast team who believe that today, technology can address challenges more wisely — when built with discipline.
-            </p>
+              <h2 className="text-display font-bold tracking-tight text-foreground mb-8 leading-[1.1]">
+                The gap is <br />
+                <span className="text-foreground-muted">execution.</span>
+              </h2>
 
-            <p className="text-body-lg">
-              Technology is the most scalable, repeatable, and reliable way to make improvement <span className="text-primary font-medium">permanent for everyone.</span>
-            </p>
+              <div className="space-y-4 max-w-lg">
+                <p className="text-body-large leading-relaxed">
+                  Our beloved country, <span className="text-primary font-medium">Bangladesh</span>, is full of challenges.
+                  But we believe it is also full of the potential to solve them.
+                </p>
+                <p className="text-body-large leading-relaxed">
+                  We don't need more ideas. We need disciplined systems that work.
+                  Systems that are transparent, reliable, and built to scale.
+                </p>
+              </div>
 
-            <p className="text-body">
-              This belief is proven globally — and adapted carefully for Bangladesh.
-            </p>
-          </div>
-        </AnimatedSection>
+              <div className="mt-10 flex items-center gap-4">
+                <button className="btn-primary">
+                  Our Philosophy
+                </button>
+                <div className="h-12 w-[1px] bg-border" />
+                <div className="flex flex-col">
+                  <span className="text-xs text-foreground-muted uppercase tracking-wider">Est.</span>
+                  <span className="font-bold text-foreground">2026</span>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
 
-        <AnimatedSection delay={0.3}>
-          <div className="mt-20 pt-10 border-t border-border">
-            <div className="grid md:grid-cols-3 gap-6 text-center">
-              <p className="text-body">
-                We don't chase hype.
-              </p>
-              <p className="text-body">
-                We measure, improve, repeat.
-              </p>
-              <p className="text-body">
-                We publish what we do — because transparency builds trust.
-              </p>
+          {/* Right: The Dashboard (Visual Proof) */}
+          <div className="relative">
+            <div className="space-y-4">
+              {/* Passion Card */}
+              <AnimatedSection delay={0.1}>
+                <div className="card-google p-6 flex items-center gap-5 group">
+                  <div className="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center text-orange-600 group-hover:scale-110 transition-transform">
+                    <Heart className="w-6 h-6 fill-current" />
+                  </div>
+                  <div>
+                    <h3 className="text-heading-3">Passion for Bangladesh</h3>
+                    <p className="text-body-sm">Solving real problems for our people.</p>
+                  </div>
+                </div>
+              </AnimatedSection>
+
+              {/* Method Card */}
+              <AnimatedSection delay={0.2}>
+                <div className="card-google p-6 flex items-center gap-5 group">
+                  <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 group-hover:scale-110 transition-transform">
+                    <BarChart3 className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-heading-3">Disciplined Method</h3>
+                    <p className="text-body-sm">Data-driven, proven, and scalable.</p>
+                  </div>
+                </div>
+              </AnimatedSection>
+
+              {/* Promise Card */}
+              <AnimatedSection delay={0.3}>
+                <div className="card-google p-6 flex items-center gap-5 group">
+                  <div className="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center text-green-600 group-hover:scale-110 transition-transform">
+                    <ArrowRight className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-heading-3">Usage of Technology</h3>
+                    <p className="text-body-sm">The most scalable way to improve.</p>
+                  </div>
+                </div>
+              </AnimatedSection>
             </div>
           </div>
-        </AnimatedSection>
+
+        </div>
       </div>
     </section>
   );
