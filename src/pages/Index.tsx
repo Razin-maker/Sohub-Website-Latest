@@ -1,5 +1,7 @@
 import { Navbar } from '@/components/layout/Navbar';
-import { Hero } from '@/components/sections/Hero';
+
+import { SocialProof } from '@/components/sections/SocialProof';
+import { Initiatives } from '@/components/sections/Initiatives';
 import { WhyWeExist } from '@/components/sections/WhyWeExist';
 import { WhatSohubIs } from '@/components/sections/WhatSohubIs';
 import { SohubStandard } from '@/components/sections/SohubStandard';
@@ -15,7 +17,8 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <main>
-        <Hero />
+        <SocialProof />
+        <Initiatives />
         <WhyWeExist />
         <WhatSohubIs />
         <SohubStandard />
