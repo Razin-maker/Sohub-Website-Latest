@@ -1,8 +1,8 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { ChevronDown, ArrowRight } from 'lucide-react';
-import { ShaderBackground } from './ShaderBackground';
 
 // ===================== HERO =====================
 interface HeroProps {
@@ -14,19 +14,10 @@ interface HeroProps {
   microDetails?: Array<string>;
 }
 
-// Spring configuration for natural, Google-style motion
-const springConfig = {
-  type: "spring" as const,
-  stiffness: 100,
-  damping: 15,
-  mass: 1
-};
-
-const smoothSpring = {
-  type: "spring" as const,
-  stiffness: 150,
-  damping: 20
-};
+// Apple-style cubic bezier easing
+type CubicBezier = [number, number, number, number];
+const appleEase: CubicBezier = [0.22, 1, 0.36, 1];
+const smoothEase: CubicBezier = [0.4, 0, 0.2, 1];
 
 export default function NeuralNetworkHero({
   title,
@@ -39,33 +30,37 @@ export default function NeuralNetworkHero({
   ],
   microDetails = ["Discipline", "Transparency", "Results"]
 }: HeroProps) {
+  const containerRef = useRef<HTMLElement>(null);
+  const isInView = useInView(containerRef, { once: true });
   const words = title.split(' ');
   const { scrollY } = useScroll();
 
-  // Parallax transforms
-  const heroY = useTransform(scrollY, [0, 500], [0, 100]);
-  const heroOpacity = useTransform(scrollY, [0, 400], [1, 0]);
-  const badgeY = useTransform(scrollY, [0, 300], [0, -30]);
+  // Smooth parallax transforms
+  const heroY = useTransform(scrollY, [0, 600], [0, 150]);
+  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const orbScale = useTransform(scrollY, [0, 400], [1, 1.3]);
+  const orbOpacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   return (
-    <section className="relative w-full h-screen min-h-screen overflow-hidden bg-background">
-      {/* Shader Background */}
-      <ShaderBackground className="w-full h-full" animate={true} />
-
-      {/* Animated Gradient Orbs - Softer, more organic */}
+    <section 
+      ref={containerRef}
+      className="relative w-full min-h-screen overflow-hidden bg-background"
+    >
+      {/* Animated Background Orbs - Subtle breathing effect */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Primary orb - top right */}
+        {/* Large primary orb - top right */}
         <motion.div
-          className="absolute -top-32 -right-32 w-[600px] h-[600px] rounded-full"
+          className="absolute -top-[20%] -right-[15%] w-[50vw] h-[50vw] max-w-[700px] max-h-[700px] rounded-full"
           style={{
-            background: 'radial-gradient(circle, hsl(var(--primary) / 0.08) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, hsl(var(--primary) / 0.06) 0%, hsl(var(--primary) / 0.02) 40%, transparent 70%)',
+            scale: orbScale,
+            opacity: orbOpacity,
           }}
           animate={{
-            scale: [1, 1.1, 1],
-            rotate: [0, 10, 0],
+            scale: [1, 1.08, 1],
           }}
           transition={{
-            duration: 20,
+            duration: 12,
             repeat: Infinity,
             ease: 'easeInOut',
           }}
@@ -73,138 +68,164 @@ export default function NeuralNetworkHero({
 
         {/* Secondary orb - bottom left */}
         <motion.div
-          className="absolute -bottom-48 -left-48 w-[500px] h-[500px] rounded-full"
+          className="absolute -bottom-[25%] -left-[20%] w-[45vw] h-[45vw] max-w-[600px] max-h-[600px] rounded-full"
           style={{
-            background: 'radial-gradient(circle, hsl(var(--primary) / 0.06) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, hsl(var(--primary) / 0.04) 0%, transparent 60%)',
+            opacity: orbOpacity,
           }}
           animate={{
-            scale: [1, 1.15, 1],
-            x: [0, 30, 0],
+            scale: [1, 1.1, 1],
+            x: [0, 20, 0],
           }}
           transition={{
-            duration: 18,
+            duration: 16,
             repeat: Infinity,
             ease: 'easeInOut',
-            delay: 3,
+            delay: 2,
+          }}
+        />
+
+        {/* Tertiary accent orb - center */}
+        <motion.div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] rounded-full"
+          style={{
+            background: 'radial-gradient(circle, hsl(var(--primary) / 0.02) 0%, transparent 50%)',
+            opacity: orbOpacity,
+          }}
+          animate={{
+            scale: [1, 1.05, 1],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: 'easeInOut',
           }}
         />
       </div>
 
       {/* Content with Parallax */}
       <motion.div
-        className="relative z-10 flex min-h-screen w-full flex-col items-center justify-center px-6 md:px-8 text-center max-w-6xl mx-auto"
+        className="relative z-10 flex min-h-screen w-full flex-col items-center justify-center px-5 sm:px-6 md:px-8 pt-24 pb-16 text-center"
         style={{ y: heroY, opacity: heroOpacity }}
       >
-        {/* Glass Badge - Google-style frosted effect */}
-        <motion.div
-          initial={{ opacity: 0, y: -20, scale: 0.9 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ ...smoothSpring, delay: 0.1 }}
-          style={{ y: badgeY }}
-          className="mb-10 flex items-center gap-3 rounded-full backdrop-blur-xl bg-white/60 dark:bg-white/10 border border-white/20 px-5 py-2.5 shadow-lg shadow-black/5"
-        >
-          <span className="rounded-full bg-primary px-3 py-1 text-xs font-bold text-primary-foreground tracking-wide">
-            {badgeLabel}
-          </span>
-          <span className="text-sm font-medium text-foreground/80">{badgeText}</span>
-        </motion.div>
+        <div className="max-w-5xl mx-auto w-full">
+          {/* Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, ease: appleEase }}
+            className="mb-6 sm:mb-8 md:mb-10"
+          >
+            <div className="inline-flex items-center gap-2 sm:gap-3 rounded-full backdrop-blur-xl bg-white/70 border border-border/30 px-3 sm:px-4 py-2 shadow-sm">
+              <span className="rounded-full bg-primary px-2.5 sm:px-3 py-1 text-[10px] sm:text-xs font-bold text-primary-foreground tracking-wide">
+                {badgeLabel}
+              </span>
+              <span className="text-xs sm:text-sm font-medium text-foreground-muted">{badgeText}</span>
+            </div>
+          </motion.div>
 
-        {/* Headline - Larger, bolder, Google-style */}
-        <h1 className="max-w-5xl text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.95] tracking-[-0.04em] text-foreground">
-          {words.map((word, index) => (
-            <motion.span
-              key={index}
-              className="inline-block mr-[0.2em] last:mr-0"
-              initial={{ opacity: 0, y: 40, rotateX: -15 }}
-              animate={{ opacity: 1, y: 0, rotateX: 0 }}
-              transition={{
-                ...springConfig,
-                delay: 0.2 + index * 0.1,
-              }}
-            >
-              {word}
-            </motion.span>
-          ))}
-        </h1>
-
-        {/* Description - Refined spacing */}
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ ...springConfig, delay: 0.5 }}
-          className="mt-8 max-w-2xl text-lg md:text-xl leading-relaxed text-foreground-muted font-normal"
-        >
-          {description}
-        </motion.p>
-
-        {/* CTA Buttons - Enhanced hover states */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ ...springConfig, delay: 0.65 }}
-          className="mt-12 flex flex-wrap items-center justify-center gap-4"
-        >
-          {ctaButtons.map((button, index) => (
-            <motion.a
-              key={index}
-              href={button.href}
-              whileHover={{ scale: 1.03, y: -2 }}
-              whileTap={{ scale: 0.98 }}
-              transition={smoothSpring}
-              className={
-                button.primary
-                  ? "group inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 text-base font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-shadow duration-300 hover:shadow-xl hover:shadow-primary/30"
-                  : "inline-flex items-center gap-2 rounded-full backdrop-blur-sm bg-white/60 dark:bg-white/10 border border-border/50 px-8 py-4 text-base font-medium text-foreground transition-all duration-300 hover:bg-white hover:border-border"
-              }
-            >
-              {button.text}
-              {button.primary && (
-                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-              )}
-            </motion.a>
-          ))}
-        </motion.div>
-
-        {/* Focus Chips - Subtle entry */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.9 }}
-          className="mt-20"
-        >
-          <p className="text-xs uppercase tracking-[0.2em] text-foreground-muted/50 mb-5 font-medium">
-            Our focus
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            {microDetails.map((detail, index) => (
+          {/* Headline - Word by word animation */}
+          <h1 className="text-[11vw] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[1] tracking-[-0.03em] text-foreground">
+            {words.map((word, index) => (
               <motion.span
                 key={index}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ ...smoothSpring, delay: 1 + index * 0.1 }}
-                className="rounded-full backdrop-blur-sm bg-white/40 dark:bg-white/5 border border-border/30 px-5 py-2.5 text-sm font-medium text-foreground-muted transition-all duration-300 hover:bg-white hover:border-border hover:text-foreground"
+                className="inline-block mr-[0.22em] last:mr-0"
+                initial={{ opacity: 0, y: 50, filter: 'blur(8px)' }}
+                animate={isInView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
+                transition={{
+                  duration: 0.8,
+                  delay: 0.15 + index * 0.08,
+                  ease: appleEase,
+                }}
               >
-                {detail}
+                {word}
               </motion.span>
             ))}
-          </div>
-        </motion.div>
+          </h1>
+
+          {/* Description */}
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.5, ease: appleEase }}
+            className="mt-6 sm:mt-8 max-w-xl sm:max-w-2xl mx-auto text-base sm:text-lg md:text-xl leading-relaxed text-foreground-muted px-2"
+          >
+            {description}
+          </motion.p>
+
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.65, ease: appleEase }}
+            className="mt-8 sm:mt-10 md:mt-12 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4"
+          >
+            {ctaButtons.map((button, index) => (
+              <motion.a
+                key={index}
+                href={button.href}
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.2, ease: smoothEase }}
+                className={
+                  button.primary
+                    ? "group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition-shadow duration-300 hover:shadow-xl hover:shadow-primary/25"
+                    : "w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-white/80 backdrop-blur-sm border border-border/50 px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-medium text-foreground transition-all duration-300 hover:bg-white hover:border-border"
+                }
+              >
+                {button.text}
+                {button.primary && (
+                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                )}
+              </motion.a>
+            ))}
+          </motion.div>
+
+          {/* Focus Chips */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 1, delay: 0.9, ease: smoothEase }}
+            className="mt-12 sm:mt-16 md:mt-20"
+          >
+            <p className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-foreground-muted/50 mb-4 sm:mb-5 font-medium">
+              Our focus
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+              {microDetails.map((detail, index) => (
+                <motion.span
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                  transition={{ 
+                    duration: 0.5, 
+                    delay: 1 + index * 0.1,
+                    ease: appleEase 
+                  }}
+                  className="rounded-full bg-white/60 backdrop-blur-sm border border-border/30 px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-medium text-foreground-muted transition-all duration-300 hover:bg-white hover:border-border hover:text-foreground"
+                >
+                  {detail}
+                </motion.span>
+              ))}
+            </div>
+          </motion.div>
+        </div>
 
         {/* Scroll Indicator */}
         <motion.div
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 1.5, duration: 1 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+          className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         >
-          <span className="text-[10px] uppercase tracking-[0.25em] text-foreground-muted/40 font-medium">
+          <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.25em] text-foreground-muted/40 font-medium">
             Scroll
           </span>
           <motion.div
             animate={{ y: [0, 6, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           >
-            <ChevronDown className="w-5 h-5 text-foreground-muted/40" />
+            <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 text-foreground-muted/40" />
           </motion.div>
         </motion.div>
       </motion.div>
