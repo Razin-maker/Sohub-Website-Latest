@@ -159,7 +159,7 @@ const ImageCard = ({ src, alt }: { src: string; alt: string }) => {
 
 export const Initiatives = () => {
     return (
-        <section id="initiatives" className="py-24 md:py-32 bg-background">
+        <section id="initiatives" className="pt-8 pb-24 md:pt-12 md:pb-32 bg-background">
             <div className="max-w-7xl mx-auto px-5 sm:px-6 md:px-8">
                 {/* Section Header */}
                 <motion.div

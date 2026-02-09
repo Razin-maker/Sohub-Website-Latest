@@ -108,8 +108,8 @@ export const EcosystemExplorer = () => {
                             key={cat}
                             onClick={() => setActiveCategory(cat)}
                             className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${activeCategory === cat
-                                    ? 'bg-primary text-white shadow-md'
-                                    : 'bg-white text-foreground-muted hover:bg-secondary hover:text-foreground'
+                                ? 'bg-primary text-white shadow-md'
+                                : 'bg-white text-foreground-muted hover:bg-secondary hover:text-foreground'
                                 }`}
                         >
                             {cat}

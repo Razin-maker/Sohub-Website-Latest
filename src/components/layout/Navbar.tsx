@@ -3,47 +3,44 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronRight } from 'lucide-react';
 import logoOrange from '@/assets/logo-orange.svg';
 
+import { CompactBackgroundPaths } from '@/components/ui/background-paths';
+import ximpulBottleImage from '@/assets/ximpul-bottle.png';
+
+import sohubShopLogo from '@/assets/Asset 13.svg';
+import sohubAILogo from '@/assets/sohub-ai-logo.svg';
+
 // Menu data with images
 const menuItems = [
-  {
-    label: 'Why We Exist',
-    href: '#why',
-    submenu: [
-      { title: 'Our Mission', description: 'Building a better Bangladesh', href: '#why', image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=300&h=200&fit=crop' },
-      { title: 'Our Values', description: 'Transparency & discipline', href: '#approach', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=300&h=200&fit=crop' },
-      { title: 'Our Story', description: 'How SOHUB began', href: '#about', image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=300&h=200&fit=crop' },
-    ],
-    links: [
-      { label: 'Vision 2030', href: '#vision' },
-      { label: 'Our Philosophy', href: '#philosophy' },
-      { label: 'Leadership', href: '#people' },
-    ]
-  },
   {
     label: 'Initiatives',
     href: '#initiatives',
     submenu: [
-      { title: 'Tech Education', description: 'Empowering the next generation', href: '#initiatives', image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=300&h=200&fit=crop' },
-      { title: 'Digital Infrastructure', description: 'Building digital Bangladesh', href: '#initiatives', image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=300&h=200&fit=crop' },
-      { title: 'Startup Ecosystem', description: 'Nurturing innovation', href: '#initiatives', image: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=300&h=200&fit=crop' },
-      { title: 'Rural Tech', description: 'Connecting communities', href: '#initiatives', image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=300&h=200&fit=crop' },
+      { title: 'CONNECT', description: 'Communication without barriers', href: '#initiatives', image: '/src/assets/WhatsApp_Image_2026-02-03_at_11.55.39-removebg-preview.png' },
+      { title: 'O-MAMA', description: 'Hygienic food access', href: '#initiatives', image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"%3E%3Crect width="300" height="200" fill="%23ffffff"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="Inter, sans-serif" font-size="48" font-weight="bold" fill="%232dcd70"%3EO-MAMA%3C/text%3E%3C/svg%3E' },
+      { title: 'EMP', description: 'Execution & accountability OS', href: '#initiatives', image: '/src/assets/EMP Logo Transparent.png' },
+      { title: 'TOLPAR', description: 'The SOHUB superapp', href: '#initiatives', image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&h=200&fit=crop' },
+      { title: 'AI', description: 'Automation that scales', href: '#initiatives', image: sohubAILogo },
+      { title: 'PROTECT', description: 'Safety & trust initiatives', href: '#initiatives', image: '/src/assets/protect-logo.png' },
+      { title: 'FILMIC STATION', description: 'Content that moves culture', href: '#initiatives', image: '/src/assets/20.00.jpg.png' },
+      { title: 'XIMPUL', description: 'Product experience standards', href: '#initiatives', image: '/src/assets/84aae5ae-dcca-4942-a63a-ee14ebc01c94.png' },
     ],
     links: [
-      { label: 'All Programs', href: '#programs' },
-      { label: 'Impact Report', href: '#impact' },
+      { label: 'View All Initiatives', href: '#initiatives' },
+      { label: 'Our Ecosystem', href: '#ecosystem' },
       { label: 'Partner With Us', href: '#partner' },
     ]
   },
   {
-    label: 'Shop',
-    href: '#shop',
+    label: 'Project Hub',
+    href: '#project-hub',
     submenu: [
-      { title: 'Merchandise', description: 'Official SOHUB gear', href: '#shop', image: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=300&h=200&fit=crop' },
-      { title: 'Digital Products', description: 'Tools & resources', href: '#shop', image: 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=300&h=200&fit=crop' },
+      { title: 'Dashboard', description: 'Manage your projects', href: '#dashboard', image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&h=200&fit=crop' },
+      { title: 'Active Projects', description: 'Track progress', href: '#projects', image: 'https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?w=300&h=200&fit=crop' },
+      { title: 'Archives', description: 'Past initiatives', href: '#archives', image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=300&h=200&fit=crop' },
     ],
     links: [
-      { label: 'New Arrivals', href: '#new' },
-      { label: 'Best Sellers', href: '#best' },
+      { label: 'Login', href: '#login' },
+      { label: 'Register', href: '#register' },
     ]
   },
   {
@@ -58,6 +55,33 @@ const menuItems = [
       { label: 'Get Started', href: '#get-started' },
       { label: 'Documentation', href: '#docs' },
       { label: 'Support', href: '#support' },
+    ]
+  },
+  {
+    label: 'Discover',
+    href: '#discover',
+    submenu: [
+      { title: 'About Us', href: '#about', image: '' },
+      { title: 'Careers', href: '#careers', image: '' },
+      { title: 'Impact Stories', href: '#impact', image: '' },
+      { title: 'Events', href: '#events', image: '' },
+      { title: 'Newsroom', href: '#news', image: '' },
+      { title: 'Contact', href: '#contact', image: '' },
+      { title: 'Help Center', href: '#help', image: '' },
+      { title: 'Community', href: '#community', image: '' },
+    ],
+    links: []
+  },
+  {
+    label: 'Shop',
+    href: '#shop',
+    submenu: [
+      { title: 'Ximpul Shop', description: 'Experience the standard', href: '#ximpul-shop', image: ximpulBottleImage },
+      { title: 'SOHUB Shop', description: 'Official merchandise', href: '#sohub-shop', image: sohubShopLogo },
+    ],
+    links: [
+      { label: 'New Arrivals', href: '#new' },
+      { label: 'Best Sellers', href: '#best' },
     ]
   },
 ];
@@ -94,11 +118,10 @@ export const Navbar = () => {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled || activeMenu
-            ? 'py-3 bg-background/95 backdrop-blur-xl border-b border-border shadow-sm'
-            : 'py-4 md:py-5 bg-transparent'
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled || activeMenu
+          ? 'py-3 bg-background/95 backdrop-blur-xl border-b border-border shadow-sm'
+          : 'py-4 md:py-5 bg-transparent'
+          }`}
         onMouseLeave={() => setActiveMenu(null)}
       >
         <div className="container-main flex items-center justify-between">
@@ -117,11 +140,10 @@ export const Navbar = () => {
               >
                 <a
                   href={item.href}
-                  className={`px-4 py-2 font-medium text-[15px] rounded-full transition-all duration-300 ${
-                    activeMenu === item.label
-                      ? 'text-foreground bg-secondary'
-                      : 'text-foreground-muted hover:text-foreground hover:bg-secondary'
-                  }`}
+                  className={`px-4 py-1 font-medium text-sm rounded-[4px] transition-all duration-300 ${activeMenu === item.label
+                    ? 'text-[#171a20] bg-black/5 dark:bg-white/10 dark:text-white'
+                    : 'text-[#171a20] hover:bg-black/5 dark:text-white dark:hover:bg-white/10'
+                    }`}
                 >
                   {item.label}
                 </a>
@@ -165,43 +187,74 @@ export const Navbar = () => {
                 {menuItems
                   .filter((item) => item.label === activeMenu)
                   .map((item) => (
-                    <div key={item.label} className="grid grid-cols-12 gap-12">
+                    <div key={item.label} className={`${item.label === 'Discover' ? 'flex justify-center' : 'grid grid-cols-12 gap-12'}`}>
                       {/* Image Cards */}
-                      <div className="col-span-9">
-                        <div className={`grid gap-6 ${
-                          item.submenu.length === 2 ? 'grid-cols-2' :
-                          item.submenu.length === 3 ? 'grid-cols-3' :
-                          'grid-cols-4'
-                        }`}>
-                          {item.submenu.map((subItem, index) => (
-                            <motion.a
-                              key={subItem.title}
-                              href={subItem.href}
-                              initial={{ opacity: 0, y: 20 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ delay: index * 0.05 }}
-                              className="group"
-                            >
-                              <div className="relative overflow-hidden rounded-xl mb-4 bg-background-subtle">
-                                <img
-                                  src={subItem.image}
-                                  alt={subItem.title}
-                                  className="w-full aspect-[4/3] object-cover transition-transform duration-500 group-hover:scale-105"
-                                />
-                              </div>
-                              <h3 className="font-semibold text-foreground text-base group-hover:text-primary transition-colors">
-                                {subItem.title}
-                              </h3>
-                              <p className="text-sm text-foreground-muted mt-1">
-                                {subItem.description}
-                              </p>
-                            </motion.a>
-                          ))}
-                        </div>
+                      <div className={`${item.label === 'Discover' ? 'w-auto px-12' : 'col-span-9'}`}>
+                        {item.label === 'Discover' ? (
+                          <div className="grid grid-cols-3 gap-24 pt-2">
+                            {/* Column 1: Resources */}
+                            <div className="flex flex-col gap-4">
+                              <h3 className="text-[#5c5e62] text-sm font-medium mb-3">Resources</h3>
+                              <a href="#standard" className="text-sm font-medium text-[#171a20] dark:text-white hover:text-black dark:hover:text-white transition-colors">The SOHUB Standard</a>
+                              <a href="#docs" className="text-sm font-medium text-[#171a20] dark:text-white hover:text-black dark:hover:text-white transition-colors">Developer Docs</a>
+                              <a href="#reports" className="text-sm font-medium text-[#171a20] dark:text-white hover:text-black dark:hover:text-white transition-colors">Transparency Reports</a>
+                              <a href="#brand" className="text-sm font-medium text-[#171a20] dark:text-white hover:text-black dark:hover:text-white transition-colors">Brand Assets</a>
+                              <a href="#research" className="text-sm font-medium text-[#171a20] dark:text-white hover:text-black dark:hover:text-white transition-colors">Research & Insights</a>
+                            </div>
+
+                            {/* Column 2: Community */}
+                            <div className="flex flex-col gap-4">
+                              <h3 className="text-[#5c5e62] text-sm font-medium mb-3">Community</h3>
+                              <a href="#volunteer" className="text-sm font-medium text-[#171a20] dark:text-white hover:text-black dark:hover:text-white transition-colors">Become a Volunteer</a>
+                              <a href="#events" className="text-sm font-medium text-[#171a20] dark:text-white hover:text-black dark:hover:text-white transition-colors">Events & Hackathons</a>
+                              <a href="#partners" className="text-sm font-medium text-[#171a20] dark:text-white hover:text-black dark:hover:text-white transition-colors">Partner Ecosystem</a>
+                              <a href="#stories" className="text-sm font-medium text-[#171a20] dark:text-white hover:text-black dark:hover:text-white transition-colors">Success Stories</a>
+                              <a href="#help" className="text-sm font-medium text-[#171a20] dark:text-white hover:text-black dark:hover:text-white transition-colors">Help Center</a>
+                            </div>
+
+                            {/* Column 3: Company */}
+                            <div className="flex flex-col gap-4">
+                              <h3 className="text-[#5c5e62] text-sm font-medium mb-3">Company</h3>
+                              <a href="#mission" className="text-sm font-medium text-[#171a20] dark:text-white hover:text-black dark:hover:text-white transition-colors">Our Mission</a>
+                              <a href="#leadership" className="text-sm font-medium text-[#171a20] dark:text-white hover:text-black dark:hover:text-white transition-colors">Leadership</a>
+                              <a href="#careers" className="text-sm font-medium text-[#171a20] dark:text-white hover:text-black dark:hover:text-white transition-colors">Careers</a>
+                              <a href="#contact" className="text-sm font-medium text-[#171a20] dark:text-white hover:text-black dark:hover:text-white transition-colors">Contact</a>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className={`${item.label === 'Shop' ? 'flex justify-center gap-12' : `grid gap-6 ${item.submenu.length === 2 ? 'grid-cols-2' : item.submenu.length === 3 ? 'grid-cols-3' : 'grid-cols-4'}`}`}>
+                            {item.submenu.map((subItem, index) => (
+                              <motion.a
+                                key={subItem.title}
+                                href={subItem.href}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: index * 0.05 }}
+                                className={`group flex flex-col ${item.label === 'Shop' ? 'items-center text-center' : ''}`}
+                              >
+                                <div className={`relative overflow-hidden rounded-xl mb-3 ${item.label === 'Shop' ? 'h-32 flex items-end justify-center bg-transparent' : (item.label === 'Initiatives' || subItem.title === 'CONNECT' || subItem.title === 'PROTECT' || subItem.title === 'XIMPUL' || subItem.title === 'EMP' ? 'bg-transparent' : 'bg-background-subtle')}`}>
+                                  <img
+                                    src={subItem.image}
+                                    alt={subItem.title}
+                                    className={`${item.label === 'Shop' ? 'w-32 h-32 object-contain mx-auto' : item.label === 'Initiatives' ? 'w-[216px] h-[122px] object-contain' : 'w-full aspect-[3/2] object-cover transition-transform duration-500 group-hover:scale-105'} relative z-10 ${item.label !== 'Shop' && item.label !== 'Initiatives' && (subItem.title === 'CONNECT' || subItem.title === 'PROTECT' || subItem.title === 'XIMPUL' || subItem.title === 'EMP') ? 'object-contain' : ''}`}
+                                  />
+                                </div>
+                                <h3 className="font-medium text-[17px] text-[#171a20] dark:text-white group-hover:text-primary transition-colors">
+                                  {subItem.title}
+                                </h3>
+                                {item.label !== 'Shop' && (
+                                  <p className="text-sm text-foreground-muted mt-1">
+                                    {subItem.description}
+                                  </p>
+                                )}
+                              </motion.a>
+                            ))}
+                          </div>
+                        )}
                       </div>
 
                       {/* Side Links */}
-                      <div className="col-span-3 border-l border-border pl-8">
+                      <div className={`${item.label === 'Discover' ? 'hidden' : 'col-span-3 border-l border-border pl-8'}`}>
                         <div className="flex flex-col gap-4">
                           {item.links.map((link, index) => (
                             <motion.a
@@ -210,7 +263,7 @@ export const Navbar = () => {
                               initial={{ opacity: 0, x: 10 }}
                               animate={{ opacity: 1, x: 0 }}
                               transition={{ delay: 0.1 + index * 0.05 }}
-                              className="text-sm font-medium text-foreground-muted hover:text-foreground transition-colors"
+                              className="text-sm font-medium text-[#171a20] dark:text-white hover:underline transition-all"
                             >
                               {link.label}
                             </motion.a>
@@ -237,7 +290,7 @@ export const Navbar = () => {
           >
             {/* Mobile menu header spacing */}
             <div className="h-16" />
-            
+
             <div className="h-[calc(100vh-4rem)] overflow-y-auto">
               <div className="px-5 py-6 flex flex-col gap-1">
                 {menuItems.map((item, index) => (
@@ -260,7 +313,7 @@ export const Navbar = () => {
                         <ChevronRight className="w-5 h-5 text-foreground-muted" />
                       </motion.div>
                     </button>
-                    
+
                     <AnimatePresence>
                       {expandedMobileMenu === item.label && (
                         <motion.div
@@ -293,7 +346,7 @@ export const Navbar = () => {
                                 </a>
                               ))}
                             </div>
-                            
+
                             {/* Quick links */}
                             <div className="flex flex-wrap gap-2 pt-2">
                               {item.links.map((link) => (
@@ -313,7 +366,7 @@ export const Navbar = () => {
                     </AnimatePresence>
                   </motion.div>
                 ))}
-                
+
                 {/* CTA Button */}
                 <motion.a
                   href="#contact"

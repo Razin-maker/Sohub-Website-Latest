@@ -116,11 +116,11 @@ export default function NeuralNetworkHero({
             transition={{ duration: 0.8, ease: appleEase }}
             className="mb-6 sm:mb-8 md:mb-10"
           >
-            <div className="inline-flex items-center gap-2 sm:gap-3 rounded-full backdrop-blur-xl bg-white/70 border border-border/30 px-3 sm:px-4 py-2 shadow-sm">
+            <div className="inline-flex items-center gap-2 sm:gap-3 rounded-full bg-white/90 border border-border/40 px-3 sm:px-4 py-2 shadow-md">
               <span className="rounded-full bg-primary px-2.5 sm:px-3 py-1 text-[10px] sm:text-xs font-bold text-primary-foreground tracking-wide">
                 {badgeLabel}
               </span>
-              <span className="text-xs sm:text-sm font-medium text-foreground-muted">{badgeText}</span>
+              <span className="text-xs sm:text-sm font-medium text-foreground">{badgeText}</span>
             </div>
           </motion.div>
 
@@ -158,7 +158,7 @@ export default function NeuralNetworkHero({
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.65, ease: appleEase }}
-            className="mt-8 sm:mt-10 md:mt-12 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4"
+            className="mt-8 sm:mt-10 md:mt-12 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 relative z-20"
           >
             {ctaButtons.map((button, index) => (
               <motion.a
@@ -169,8 +169,8 @@ export default function NeuralNetworkHero({
                 transition={{ duration: 0.2, ease: smoothEase }}
                 className={
                   button.primary
-                    ? "group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition-shadow duration-300 hover:shadow-xl hover:shadow-primary/25"
-                    : "w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-white/80 backdrop-blur-sm border border-border/50 px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-medium text-foreground transition-all duration-300 hover:bg-white hover:border-border"
+                    ? "group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-semibold text-white shadow-lg shadow-primary/20 transition-shadow duration-300 hover:shadow-xl hover:shadow-primary/25"
+                    : "w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-white border-2 border-gray-300 px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-semibold text-gray-900 transition-all duration-300 hover:bg-gray-50 hover:border-gray-400 hover:shadow-md"
                 }
               >
                 {button.text}
@@ -186,9 +186,9 @@ export default function NeuralNetworkHero({
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 1, delay: 0.9, ease: smoothEase }}
-            className="mt-12 sm:mt-16 md:mt-20"
+            className="mt-12 sm:mt-16 md:mt-20 relative z-20"
           >
-            <p className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-foreground-muted/50 mb-4 sm:mb-5 font-medium">
+            <p className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-gray-500 mb-4 sm:mb-5 font-semibold">
               Our focus
             </p>
             <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
@@ -202,7 +202,7 @@ export default function NeuralNetworkHero({
                     delay: 1 + index * 0.1,
                     ease: appleEase
                   }}
-                  className="rounded-full bg-white/60 backdrop-blur-sm border border-border/30 px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-medium text-foreground-muted transition-all duration-300 hover:bg-white hover:border-border hover:text-foreground"
+                  className="rounded-full bg-white border-2 border-gray-300 px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold text-gray-900 shadow-sm transition-all duration-300 hover:bg-gray-50 hover:border-gray-400 hover:shadow-md"
                 >
                   {detail}
                 </motion.span>

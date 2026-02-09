@@ -18,11 +18,10 @@ const Index = () => {
       <Navbar />
       <main>
         <SocialProof />
-        <Initiatives />
         <WhyWeExist />
         <WhatSohubIs />
+        <Initiatives />
         <SohubStandard />
-        <EcosystemExplorer />
         <OurApproach />
         <Audience />
         <Transparency />
