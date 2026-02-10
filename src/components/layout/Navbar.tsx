@@ -8,6 +8,12 @@ import ximpulBottleImage from '@/assets/ximpul-bottle.png';
 
 import sohubShopLogo from '@/assets/Asset 13.svg';
 import sohubAILogo from '@/assets/sohub-ai-logo.svg';
+import sohubConnectLogo from '@/assets/connect (1).png';
+import oMamaLogo from '@/assets/O-mama (1).png';
+import empLogo from '@/assets/emp (1).png';
+import filmicLogo from '@/assets/Filmic (1).png';
+import tolparLogo from '@/assets/tolpar-logo.svg';
+import protectLogo from '@/assets/protect-logo (1).png';
 
 // Menu data with images
 const menuItems = [
@@ -15,13 +21,13 @@ const menuItems = [
     label: 'Initiatives',
     href: '#initiatives',
     submenu: [
-      { title: 'CONNECT', description: 'Communication without barriers', href: '#initiatives', image: '/src/assets/WhatsApp_Image_2026-02-03_at_11.55.39-removebg-preview.png' },
-      { title: 'O-MAMA', description: 'Hygienic food access', href: '#initiatives', image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"%3E%3Crect width="300" height="200" fill="%23ffffff"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="Inter, sans-serif" font-size="48" font-weight="bold" fill="%232dcd70"%3EO-MAMA%3C/text%3E%3C/svg%3E' },
-      { title: 'EMP', description: 'Execution & accountability OS', href: '#initiatives', image: '/src/assets/EMP Logo Transparent.png' },
-      { title: 'TOLPAR', description: 'The SOHUB superapp', href: '#initiatives', image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&h=200&fit=crop' },
+      { title: 'CONNECT', description: 'Communication without barriers', href: '#initiatives', image: sohubConnectLogo },
+      { title: 'O-MAMA', description: 'Hygienic food access', href: '#initiatives', image: oMamaLogo },
+      { title: 'EMP', description: 'Execution & accountability OS', href: '#initiatives', image: empLogo },
+      { title: 'TOLPAR', description: 'The SOHUB superapp', href: '#initiatives', image: tolparLogo },
       { title: 'AI', description: 'Automation that scales', href: '#initiatives', image: sohubAILogo },
-      { title: 'PROTECT', description: 'Safety & trust initiatives', href: '#initiatives', image: '/src/assets/protect-logo.png' },
-      { title: 'FILMIC STATION', description: 'Content that moves culture', href: '#initiatives', image: '/src/assets/20.00.jpg.png' },
+      { title: 'PROTECT', description: 'Safety & trust initiatives', href: '#initiatives', image: protectLogo },
+      { title: 'FILMIC STATION', description: 'Content that moves culture', href: '#initiatives', image: filmicLogo },
       { title: 'XIMPUL', description: 'Product experience standards', href: '#initiatives', image: '/src/assets/84aae5ae-dcca-4942-a63a-ee14ebc01c94.png' },
     ],
     links: [
