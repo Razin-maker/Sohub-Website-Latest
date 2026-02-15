@@ -1,19 +1,23 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronRight } from 'lucide-react';
+import { Menu, X, ChevronRight, ChevronLeft } from 'lucide-react';
 import logoOrange from '@/assets/logo-orange.svg';
 
 import { CompactBackgroundPaths } from '@/components/ui/background-paths';
-import ximpulBottleImage from '@/assets/ximpul-bottle.png';
+import ximpulBottleImage from '@/assets/ximpl-flow.png';
 
-import sohubShopLogo from '@/assets/Asset 13.svg';
+import aloImage from '@/assets/Alo.png';
+import pdlcImage from '@/assets/pdlc.png';
+import switchImage from '@/assets/Switch.png';
 import sohubAILogo from '@/assets/sohub-ai-logo.svg';
-import sohubConnectLogo from '@/assets/connect (1).png';
-import oMamaLogo from '@/assets/O-mama (1).png';
-import empLogo from '@/assets/emp (1).png';
-import filmicLogo from '@/assets/Filmic (1).png';
-import tolparLogo from '@/assets/tolpar-logo.svg';
-import protectLogo from '@/assets/protect-logo (1).png';
+import ximpulLogo from '@/assets/ximpul.png';
+import sohubConnectLogo from '@/assets/con.png';
+import oMamaLogo from '@/assets/o-mam.png';
+import empLogo from '@/assets/emp.png';
+import filmicLogo from '@/assets/Filmicstation.png';
+import tolparLogo from '@/assets/tolper.png';
+import protectLogo from '@/assets/protect.png';
+
 
 // Menu data with images
 const menuItems = [
@@ -28,7 +32,7 @@ const menuItems = [
       { title: 'AI', description: 'Automation that scales', href: '#initiatives', image: sohubAILogo },
       { title: 'PROTECT', description: 'Safety & trust initiatives', href: '#initiatives', image: protectLogo },
       { title: 'FILMIC STATION', description: 'Content that moves culture', href: '#initiatives', image: filmicLogo },
-      { title: 'XIMPUL', description: 'Product experience standards', href: '#initiatives', image: '/src/assets/84aae5ae-dcca-4942-a63a-ee14ebc01c94.png' },
+      { title: 'XIMPUL', description: 'Product experience standards', href: '#initiatives', image: ximpulLogo },
     ],
     links: [
       { label: 'View All Initiatives', href: '#initiatives' },
@@ -82,13 +86,12 @@ const menuItems = [
     label: 'Shop',
     href: '#shop',
     submenu: [
-      { title: 'Ximpul Shop', description: 'Experience the standard', href: '#ximpul-shop', image: ximpulBottleImage },
-      { title: 'SOHUB Shop', description: 'Official merchandise', href: '#sohub-shop', image: sohubShopLogo },
+      { title: 'Ximpul', description: 'Experience the standard', href: '#ximpul-shop', image: ximpulBottleImage },
+      { title: 'ALO', description: 'Premium lifestyle', href: '#alo-shop', image: aloImage },
+      { title: 'PDLC Film', description: 'Smart film technology', href: '#pdlc-shop', image: pdlcImage },
+      { title: 'Smart Switch', description: 'Intelligent controls', href: '#smart-switch', image: switchImage },
     ],
-    links: [
-      { label: 'New Arrivals', href: '#new' },
-      { label: 'Best Sellers', href: '#best' },
-    ]
+    links: []
   },
 ];
 
@@ -96,7 +99,13 @@ export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
-  const [expandedMobileMenu, setExpandedMobileMenu] = useState<string | null>(null);
+  const [mobileMenuView, setMobileMenuView] = useState<'main' | string>('main');
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) {
+      setTimeout(() => setMobileMenuView('main'), 300); // Reset after close animation
+    }
+  }, [isMobileMenuOpen]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -181,78 +190,83 @@ export const Navbar = () => {
         <AnimatePresence>
           {activeMenu && (
             <motion.div
-              initial={{ opacity: 0, y: -10 }}
+              initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
-              className="absolute top-full left-0 right-0 bg-background border-b border-border shadow-xl hidden lg:block"
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.5, ease: [0.5, 0, 0, 0.75] }}
+              className="absolute top-full left-0 right-0 bg-white dark:bg-background shadow-[0_8px_16px_rgba(0,0,0,0.16)] hidden lg:block z-10"
               onMouseEnter={() => setActiveMenu(activeMenu)}
               onMouseLeave={() => setActiveMenu(null)}
             >
-              <div className="container-main py-10">
+              <div className="container-main pt-6 pb-8">
                 {menuItems
                   .filter((item) => item.label === activeMenu)
                   .map((item) => (
-                    <div key={item.label} className={`${item.label === 'Discover' ? 'flex justify-center' : 'grid grid-cols-12 gap-12'}`}>
+                    <div key={item.label} className={`${item.label === 'Discover' || item.label === 'Shop' ? 'flex justify-center' : 'grid grid-cols-12 gap-8'}`}>
                       {/* Image Cards */}
-                      <div className={`${item.label === 'Discover' ? 'w-auto px-12' : 'col-span-9'}`}>
+                      <div className={`${item.label === 'Discover' || item.label === 'Shop' ? 'w-auto px-12' : 'col-span-8 pl-32'}`}>
                         {item.label === 'Discover' ? (
-                          <div className="grid grid-cols-3 gap-24 pt-2">
+                          <div className="grid grid-cols-3 gap-32 pt-2">
                             {/* Column 1: Resources */}
-                            <div className="flex flex-col gap-4">
-                              <h3 className="text-[#5c5e62] text-sm font-medium mb-3">Resources</h3>
-                              <a href="#standard" className="text-sm font-medium text-[#171a20] dark:text-white hover:text-black dark:hover:text-white transition-colors">The SOHUB Standard</a>
-                              <a href="#docs" className="text-sm font-medium text-[#171a20] dark:text-white hover:text-black dark:hover:text-white transition-colors">Developer Docs</a>
-                              <a href="#reports" className="text-sm font-medium text-[#171a20] dark:text-white hover:text-black dark:hover:text-white transition-colors">Transparency Reports</a>
-                              <a href="#brand" className="text-sm font-medium text-[#171a20] dark:text-white hover:text-black dark:hover:text-white transition-colors">Brand Assets</a>
-                              <a href="#research" className="text-sm font-medium text-[#171a20] dark:text-white hover:text-black dark:hover:text-white transition-colors">Research & Insights</a>
+                            <div className="flex flex-col gap-6">
+                              <h3 className="text-[#5c5e62] text-[13px] font-normal mb-1">Resources</h3>
+                              <a href="#standard" className="text-[14px] font-medium text-[#171a20] dark:text-white hover:text-[#5c5e62] transition-colors">The SOHUB Standard</a>
+                              <a href="#docs" className="text-[14px] font-medium text-[#171a20] dark:text-white hover:text-[#5c5e62] transition-colors">Documentation</a>
+                              <a href="#blog" className="text-[14px] font-medium text-[#171a20] dark:text-white hover:text-[#5c5e62] transition-colors">Blog & Insights</a>
+                              <a href="#case-studies" className="text-[14px] font-medium text-[#171a20] dark:text-white hover:text-[#5c5e62] transition-colors">Case Studies</a>
+                              <a href="#brand" className="text-[14px] font-medium text-[#171a20] dark:text-white hover:text-[#5c5e62] transition-colors">Brand Assets</a>
                             </div>
 
-                            {/* Column 2: Community */}
-                            <div className="flex flex-col gap-4">
-                              <h3 className="text-[#5c5e62] text-sm font-medium mb-3">Community</h3>
-                              <a href="#volunteer" className="text-sm font-medium text-[#171a20] dark:text-white hover:text-black dark:hover:text-white transition-colors">Become a Volunteer</a>
-                              <a href="#events" className="text-sm font-medium text-[#171a20] dark:text-white hover:text-black dark:hover:text-white transition-colors">Events & Hackathons</a>
-                              <a href="#partners" className="text-sm font-medium text-[#171a20] dark:text-white hover:text-black dark:hover:text-white transition-colors">Partner Ecosystem</a>
-                              <a href="#stories" className="text-sm font-medium text-[#171a20] dark:text-white hover:text-black dark:hover:text-white transition-colors">Success Stories</a>
-                              <a href="#help" className="text-sm font-medium text-[#171a20] dark:text-white hover:text-black dark:hover:text-white transition-colors">Help Center</a>
+                            {/* Column 2: Ecosystem */}
+                            <div className="flex flex-col gap-6">
+                              <h3 className="text-[#5c5e62] text-[13px] font-normal mb-1">Ecosystem</h3>
+                              <a href="#partners" className="text-[14px] font-medium text-[#171a20] dark:text-white hover:text-[#5c5e62] transition-colors">Partner With Us</a>
+                              <a href="#volunteer" className="text-[14px] font-medium text-[#171a20] dark:text-white hover:text-[#5c5e62] transition-colors">Become a Volunteer</a>
+                              <a href="#events" className="text-[14px] font-medium text-[#171a20] dark:text-white hover:text-[#5c5e62] transition-colors">Events & Meetups</a>
+                              <a href="#stories" className="text-[14px] font-medium text-[#171a20] dark:text-white hover:text-[#5c5e62] transition-colors">Success Stories</a>
+                              <a href="#help" className="text-[14px] font-medium text-[#171a20] dark:text-white hover:text-[#5c5e62] transition-colors">Help Center</a>
                             </div>
 
                             {/* Column 3: Company */}
-                            <div className="flex flex-col gap-4">
-                              <h3 className="text-[#5c5e62] text-sm font-medium mb-3">Company</h3>
-                              <a href="#mission" className="text-sm font-medium text-[#171a20] dark:text-white hover:text-black dark:hover:text-white transition-colors">Our Mission</a>
-                              <a href="#leadership" className="text-sm font-medium text-[#171a20] dark:text-white hover:text-black dark:hover:text-white transition-colors">Leadership</a>
-                              <a href="#careers" className="text-sm font-medium text-[#171a20] dark:text-white hover:text-black dark:hover:text-white transition-colors">Careers</a>
-                              <a href="#contact" className="text-sm font-medium text-[#171a20] dark:text-white hover:text-black dark:hover:text-white transition-colors">Contact</a>
+                            <div className="flex flex-col gap-6">
+                              <h3 className="text-[#5c5e62] text-[13px] font-normal mb-1">Company</h3>
+                              <a href="#about" className="text-[14px] font-medium text-[#171a20] dark:text-white hover:text-[#5c5e62] transition-colors">About SOHUB</a>
+                              <a href="#mission" className="text-[14px] font-medium text-[#171a20] dark:text-white hover:text-[#5c5e62] transition-colors">Our Mission</a>
+                              <a href="#leadership" className="text-[14px] font-medium text-[#171a20] dark:text-white hover:text-[#5c5e62] transition-colors">Leadership</a>
+                              <a href="#careers" className="text-[14px] font-medium text-[#171a20] dark:text-white hover:text-[#5c5e62] transition-colors">Careers</a>
+                              <a href="#contact" className="text-[14px] font-medium text-[#171a20] dark:text-white hover:text-[#5c5e62] transition-colors">Contact</a>
                             </div>
                           </div>
                         ) : (
-                          <div className={`${item.label === 'Shop' ? 'flex justify-center gap-12' : `grid gap-6 ${item.submenu.length === 2 ? 'grid-cols-2' : item.submenu.length === 3 ? 'grid-cols-3' : 'grid-cols-4'}`}`}>
+                          <div className={`${item.label === 'Shop' ? 'flex justify-center gap-12' : `grid ${item.submenu.length === 2 ? 'grid-cols-2' : item.submenu.length === 3 ? 'grid-cols-3' : 'grid-cols-4'} gap-x-8 gap-y-5`}`}>
                             {item.submenu.map((subItem, index) => (
                               <motion.a
                                 key={subItem.title}
                                 href={subItem.href}
-                                initial={{ opacity: 0, y: 20 }}
+                                initial={{ opacity: 0, y: 12 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.05 }}
-                                className={`group flex flex-col ${item.label === 'Shop' ? 'items-center text-center' : ''}`}
+                                transition={{ delay: index * 0.04, duration: 0.4, ease: [0.5, 0, 0, 0.75] }}
+                                className={`group flex flex-col items-center ${item.label === 'Shop' ? 'text-center' : ''}`}
                               >
-                                <div className={`relative overflow-hidden rounded-xl mb-3 ${item.label === 'Shop' ? 'h-32 flex items-end justify-center bg-transparent' : (item.label === 'Initiatives' || subItem.title === 'CONNECT' || subItem.title === 'PROTECT' || subItem.title === 'XIMPUL' || subItem.title === 'EMP' ? 'bg-transparent' : 'bg-background-subtle')}`}>
+                                <div className={`relative rounded-xl mb-3 ${item.label === 'Shop' ? 'overflow-hidden w-56 aspect-[4/3] flex items-center justify-center bg-transparent' : item.label === 'Initiatives' ? 'h-[85px] w-full flex items-center justify-center bg-transparent' : 'overflow-hidden bg-background-subtle'}`}>
                                   <img
                                     src={subItem.image}
                                     alt={subItem.title}
-                                    className={`${item.label === 'Shop' ? 'w-32 h-32 object-contain mx-auto' : item.label === 'Initiatives' ? 'w-[216px] h-[122px] object-contain' : 'w-full aspect-[3/2] object-cover transition-transform duration-500 group-hover:scale-105'} relative z-10 ${item.label !== 'Shop' && item.label !== 'Initiatives' && (subItem.title === 'CONNECT' || subItem.title === 'PROTECT' || subItem.title === 'XIMPUL' || subItem.title === 'EMP') ? 'object-contain' : ''}`}
+                                    className={`${item.label === 'Shop' ? 'w-full h-full object-contain p-2' : item.label === 'Initiatives' ? 'max-h-[85px] max-w-[150px] w-auto h-auto object-contain' : 'w-full aspect-[3/2] object-cover transition-transform duration-500 group-hover:scale-105'} relative z-10`}
                                   />
                                 </div>
-                                <h3 className="font-medium text-[17px] text-[#171a20] dark:text-white group-hover:text-primary transition-colors">
+                                <h3 className="font-semibold text-[17px] text-[#171a20] dark:text-white text-center group-hover:text-primary transition-colors">
                                   {subItem.title}
                                 </h3>
-                                {item.label !== 'Shop' && (
-                                  <p className="text-sm text-foreground-muted mt-1">
+                                {item.label === 'Initiatives' ? (
+                                  <span className="text-[14px] font-normal text-[#393c41] dark:text-white/70 mt-1.5 text-center hover:underline transition-all">
+                                    Explore
+                                  </span>
+                                ) : item.label !== 'Shop' ? (
+                                  <p className="text-[14px] text-[#5c5e62] mt-1 text-center">
                                     {subItem.description}
                                   </p>
-                                )}
+                                ) : null}
                               </motion.a>
                             ))}
                           </div>
@@ -260,7 +274,7 @@ export const Navbar = () => {
                       </div>
 
                       {/* Side Links */}
-                      <div className={`${item.label === 'Discover' ? 'hidden' : 'col-span-3 border-l border-border pl-8'}`}>
+                      <div className={`${item.label === 'Discover' || item.label === 'Shop' ? 'hidden' : 'col-span-3 border-l-2 border-[#d2d2d2] dark:border-white/10 pl-8'}`}>
                         <div className="flex flex-col gap-4">
                           {item.links.map((link, index) => (
                             <motion.a
@@ -269,7 +283,7 @@ export const Navbar = () => {
                               initial={{ opacity: 0, x: 10 }}
                               animate={{ opacity: 1, x: 0 }}
                               transition={{ delay: 0.1 + index * 0.05 }}
-                              className="text-sm font-medium text-[#171a20] dark:text-white hover:underline transition-all"
+                              className="text-[14px] font-medium text-[#171a20] dark:text-white hover:underline transition-all"
                             >
                               {link.label}
                             </motion.a>
@@ -284,109 +298,194 @@ export const Navbar = () => {
         </AnimatePresence>
       </motion.nav>
 
-      {/* Mobile Menu - Full Screen */}
+      {/* Backdrop blur overlay — OUTSIDE nav so it can blur page content */}
       <AnimatePresence>
-        {isMobileMenuOpen && (
+        {activeMenu && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 lg:hidden bg-background"
-          >
-            {/* Mobile menu header spacing */}
-            <div className="h-16" />
+            className="fixed left-0 right-0 bottom-0 top-14 backdrop-blur-md bg-black/10 hidden lg:block z-40 pointer-events-none"
+          />
+        )}
+      </AnimatePresence>
 
-            <div className="h-[calc(100vh-4rem)] overflow-y-auto">
-              <div className="px-5 py-6 flex flex-col gap-1">
-                {menuItems.map((item, index) => (
+      {/* Tesla-style Mobile Menu — right-sliding panel */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <>
+            {/* Backdrop overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 z-40 lg:hidden bg-black/30 backdrop-blur-sm"
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+
+            {/* Sliding panel from right */}
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+              className="fixed top-0 right-0 bottom-0 z-50 lg:hidden w-[320px] bg-white dark:bg-zinc-900 shadow-2xl overflow-hidden"
+            >
+              <AnimatePresence mode="wait">
+                {mobileMenuView === 'main' ? (
+                  /* MAIN MENU VIEW */
                   <motion.div
-                    key={item.label}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.05, duration: 0.3 }}
-                    className="border-b border-border/50"
+                    key="main"
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    exit={{ x: -20, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="h-full flex flex-col"
                   >
-                    <button
-                      onClick={() => setExpandedMobileMenu(expandedMobileMenu === item.label ? null : item.label)}
-                      className="w-full flex items-center justify-between py-4 text-foreground text-lg font-semibold"
-                    >
-                      {item.label}
-                      <motion.div
-                        animate={{ rotate: expandedMobileMenu === item.label ? 90 : 0 }}
-                        transition={{ duration: 0.2 }}
+                    {/* Header: Close Button Only */}
+                    <div className="flex justify-end p-5">
+                      <button
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="p-2 rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                        aria-label="Close menu"
                       >
-                        <ChevronRight className="w-5 h-5 text-foreground-muted" />
-                      </motion.div>
-                    </button>
+                        <X size={20} className="text-zinc-900 dark:text-zinc-100" />
+                      </button>
+                    </div>
 
-                    <AnimatePresence>
-                      {expandedMobileMenu === item.label && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: 'auto', opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3 }}
-                          className="overflow-hidden"
-                        >
-                          <div className="pb-4 space-y-3">
-                            {/* Submenu items with images - horizontal scroll on mobile */}
-                            <div className="flex gap-3 overflow-x-auto pb-3 -mx-5 px-5 scrollbar-hide">
-                              {item.submenu.map((subItem) => (
-                                <a
-                                  key={subItem.title}
-                                  href={subItem.href}
-                                  className="flex-shrink-0 w-40 group"
-                                  onClick={() => setIsMobileMenuOpen(false)}
-                                >
-                                  <div className="relative overflow-hidden rounded-lg mb-2 bg-background-subtle">
-                                    <img
-                                      src={subItem.image}
-                                      alt={subItem.title}
-                                      className="w-full aspect-[4/3] object-cover"
-                                    />
-                                  </div>
-                                  <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors line-clamp-1">
-                                    {subItem.title}
-                                  </span>
-                                </a>
-                              ))}
-                            </div>
+                    {/* Content */}
+                    <div className="px-5 overflow-y-auto flex-1">
+                      <nav className="flex flex-col pb-10">
+                        {menuItems.map((item, index) => (
+                          <motion.div
+                            key={item.label}
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: index * 0.03, duration: 0.3 }}
+                            className="py-1"
+                          >
+                            {item.submenu?.length > 0 ? (
+                              <button
+                                onClick={() => setMobileMenuView(item.label)}
+                                className="w-full flex items-center justify-between py-3 px-3 -mx-3 rounded-md text-[17px] font-medium text-zinc-900 dark:text-zinc-100 active:bg-zinc-100 dark:active:bg-zinc-800 transition-colors text-left"
+                              >
+                                {item.label}
+                                <ChevronRight className="w-4 h-4 text-zinc-400 dark:text-zinc-500" />
+                              </button>
+                            ) : (
+                              <a
+                                href={item.href}
+                                className="block py-3 px-3 -mx-3 rounded-md text-[17px] font-medium text-zinc-900 dark:text-zinc-100 active:bg-zinc-100 dark:active:bg-zinc-800 transition-colors"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                              >
+                                {item.label}
+                              </a>
+                            )}
+                          </motion.div>
+                        ))}
 
-                            {/* Quick links */}
-                            <div className="flex flex-wrap gap-2 pt-2">
-                              {item.links.map((link) => (
-                                <a
-                                  key={link.label}
-                                  href={link.href}
-                                  className="text-sm text-foreground-muted hover:text-primary transition-colors"
-                                  onClick={() => setIsMobileMenuOpen(false)}
-                                >
-                                  {link.label}
-                                </a>
-                              ))}
-                            </div>
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+                        <div className="h-4" />
+
+                        {['The SOHUB Standard', 'About Us', 'Careers', 'Help Center'].map((link, index) => (
+                          <motion.a
+                            key={link}
+                            href="#"
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: (menuItems.length + index) * 0.03 + 0.1, duration: 0.3 }}
+                            className="block py-3 px-3 -mx-3 text-[14px] font-medium text-zinc-600 dark:text-zinc-400 active:bg-zinc-50 dark:active:bg-zinc-800/50 rounded-md transition-colors"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                          >
+                            {link}
+                          </motion.a>
+                        ))}
+                      </nav>
+                    </div>
                   </motion.div>
-                ))}
+                ) : (
+                  /* SUBMENU VIEW */
+                  <motion.div
+                    key="submenu"
+                    initial={{ x: 20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    exit={{ x: 20, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="h-full flex flex-col"
+                  >
+                    {/* Submenu Header: Back + Title + Close */}
+                    <div className="flex items-center justify-between p-4 border-b border-zinc-100 dark:border-zinc-800/50">
+                      <button
+                        onClick={() => setMobileMenuView('main')}
+                        className="flex items-center gap-1 text-[14px] font-medium text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors"
+                      >
+                        <ChevronLeft size={18} />
+                        Back
+                      </button>
+                      <span className="text-[15px] font-semibold text-zinc-900 dark:text-zinc-100 absolute left-1/2 -translate-x-1/2">
+                        {mobileMenuView}
+                      </span>
+                      <button
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="p-2 -mr-2 text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors"
+                      >
+                        <X size={20} />
+                      </button>
+                    </div>
 
-                {/* CTA Button */}
-                <motion.a
-                  href="#contact"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.25, duration: 0.3 }}
-                  className="mt-6 px-6 py-4 bg-primary text-primary-foreground font-semibold rounded-full text-center"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Contact Us
-                </motion.a>
-              </div>
-            </div>
-          </motion.div>
+                    {/* Submenu Content */}
+                    <div className="px-5 overflow-y-auto flex-1 py-4">
+                      {/* Initiatives Logic (Grid) */}
+                      {mobileMenuView === 'Initiatives' && (
+                        <div className="grid grid-cols-2 gap-3">
+                          {menuItems.find((m) => m.label === 'Initiatives')?.submenu.map((subItem) => (
+                            <a
+                              key={subItem.title}
+                              href={subItem.href}
+                              className="flex flex-col items-center gap-3 py-4 px-2 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 active:bg-zinc-100 dark:active:bg-zinc-800 transition-colors text-center"
+                              onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                              <div className="h-10 flex items-center justify-center">
+                                <img
+                                  src={subItem.image}
+                                  alt={subItem.title}
+                                  className="max-h-8 max-w-[80px] w-auto h-auto object-contain"
+                                />
+                              </div>
+                              <span className="text-[11px] font-medium text-zinc-600 dark:text-zinc-400 uppercase tracking-wider">{subItem.title}</span>
+                            </a>
+                          ))}
+                        </div>
+                      )}
+
+                      {/* Default List Logic (Other Menus) */}
+                      {mobileMenuView !== 'Initiatives' && (
+                        <div className="flex flex-col">
+                          {menuItems.find((m) => m.label === mobileMenuView)?.submenu.map((subItem) => (
+                            <a
+                              key={subItem.title}
+                              href={subItem.href}
+                              className="block py-3 px-3 -mx-3 rounded-md text-[15px] font-medium text-zinc-800 dark:text-zinc-200 active:bg-zinc-50 dark:active:bg-zinc-800/50 transition-colors"
+                              onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                              <div className="flex items-center justify-between">
+                                {subItem.title}
+                                <ChevronRight className="w-3.5 h-3.5 text-zinc-300 dark:text-zinc-600" />
+                              </div>
+                              {subItem.description && (
+                                <p className="text-[12px] font-normal text-zinc-400 dark:text-zinc-500 mt-0.5">{subItem.description}</p>
+                              )}
+                            </a>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>
