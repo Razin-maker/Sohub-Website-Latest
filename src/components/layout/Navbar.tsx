@@ -11,7 +11,7 @@ import pdlcImage from '@/assets/pdlc.png';
 import switchImage from '@/assets/Switch.png';
 import sohubAILogo from '@/assets/sohub-ai-logo.svg';
 import ximpulLogo from '@/assets/ximpul.png';
-import sohubConnectLogo from '@/assets/con.png';
+import sohubConnectLogo from '@/assets/sohub-connect.png';
 import oMamaLogo from '@/assets/o-mam.png';
 import empLogo from '@/assets/emp.png';
 import filmicLogo from '@/assets/Filmicstation.png';
